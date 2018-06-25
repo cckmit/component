@@ -1,0 +1,44 @@
+dependencies {
+    compile project(":dst-api")
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'	
+    compile 'org.springframework:spring-beans:4.1.7.RELEASE'	
+    compile 'org.springframework:spring-context:4.1.7.RELEASE'	
+    
+    compile 'com.github.pagehelper:pagehelper:5.1.2'	
+    //compile 'org.hibernate:hibernate-validator:6.0.6.Final'
+    
+    //compile 'org.springframework:spring-tx:4.2.0.RELEASE'
+    //compile 'org.springframework:spring-jdbc:4.2.0.RELEASE'	
+    //compile 'org.springframework:spring-beans:4.2.0.RELEASE'	
+    //compile 'org.springframework:spring-context:4.2.0.RELEASE'	
+    
+    //compile 'com.alibaba:fastjson:1.1.37'
+    compile 'com.alibaba:fastjson:1.1.37'
+    compile 'org.javassist:javassist:3.18.2-GA'
+    compile 'org.mortbay.jetty:jetty-util:6.1.26'
+    compile ('org.mortbay.jetty:jetty:6.1.26'){
+		exclude group: 'org.mortbay.jetty', module: 'servlet-api'
+	}
+	compile 'javax.servlet:javax.servlet-api:3.0.1'
+    
+	compile ('com.x:sdk:1.0.1-SNAPSHOT') {
+		exclude group: 'org.dom4j', module: 'dom4j'
+	}
+	
+//	compile ('com.ifudata.dvp:dvp-redis:2.0-SNAPSHOT') {
+//    	exclude group: 'org.springframework'
+//    }
+//    compile ('com.ifudata.dvp:dvp-redis-init:2.3-SNAPSHOT') {
+//    	exclude group: 'org.springframework'
+//    }
+    
+   testCompile(
+            "org.springframework:spring-test:4.1.7.RELEASE",
+           "junit:junit:4.12"
+   )
+}

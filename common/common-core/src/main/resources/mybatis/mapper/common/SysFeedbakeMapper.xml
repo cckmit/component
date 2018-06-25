@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.SysFeedbakeMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.SysFeedbake" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FEEDBAKE_SOURE" property="feedbakeSoure" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="PROBLEM_TYPE" property="problemType" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="PHONE_NUM" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="MAIL" property="mail" jdbcType="VARCHAR" />
+    <result column="FEEDBAKE_CONTEN" property="feedbakeConten" jdbcType="VARCHAR" />
+    <result column="FEEDBAKE_TIME" property="feedbakeTime" jdbcType="TIMESTAMP" />
+    <result column="REPLE" property="reple" jdbcType="VARCHAR" />
+    <result column="HANDLE_PEOPLE" property="handlePeople" jdbcType="VARCHAR" />
+    <result column="HANDLE_TIME" property="handleTime" jdbcType="TIMESTAMP" />
+    <result column="HANDLE_TYPE" property="handleType" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FEEDBAKE_SOURE, PRODUCT_NAME, PROBLEM_TYPE, USER_NAME, PHONE_NUM, MAIL, FEEDBAKE_CONTEN, 
+    FEEDBAKE_TIME, REPLE, HANDLE_PEOPLE, HANDLE_TIME, HANDLE_TYPE, REMARKS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.SysFeedbakeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_feedbake
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_feedbake
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_feedbake
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.SysFeedbakeCriteria" >
+    delete from sys_feedbake
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.SysFeedbake" >
+    insert into sys_feedbake (ID, FEEDBAKE_SOURE, PRODUCT_NAME, 
+      PROBLEM_TYPE, USER_NAME, PHONE_NUM, 
+      MAIL, FEEDBAKE_CONTEN, FEEDBAKE_TIME, 
+      REPLE, HANDLE_PEOPLE, HANDLE_TIME, 
+      HANDLE_TYPE, REMARKS)
+    values (#{id,jdbcType=VARCHAR}, #{feedbakeSoure,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{problemType,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{feedbakeConten,jdbcType=VARCHAR}, #{feedbakeTime,jdbcType=TIMESTAMP}, 
+      #{reple,jdbcType=VARCHAR}, #{handlePeople,jdbcType=VARCHAR}, #{handleTime,jdbcType=TIMESTAMP}, 
+      #{handleType,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.SysFeedbake" >
+    insert into sys_feedbake
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="feedbakeSoure != null" >
+        FEEDBAKE_SOURE,
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME,
+      </if>
+      <if test="problemType != null" >
+        PROBLEM_TYPE,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="phoneNum != null" >
+        PHONE_NUM,
+      </if>
+      <if test="mail != null" >
+        MAIL,
+      </if>
+      <if test="feedbakeConten != null" >
+        FEEDBAKE_CONTEN,
+      </if>
+      <if test="feedbakeTime != null" >
+        FEEDBAKE_TIME,
+      </if>
+      <if test="reple != null" >
+        REPLE,
+      </if>
+      <if test="handlePeople != null" >
+        HANDLE_PEOPLE,
+      </if>
+      <if test="handleTime != null" >
+        HANDLE_TIME,
+      </if>
+      <if test="handleType != null" >
+        HANDLE_TYPE,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbakeSoure != null" >
+        #{feedbakeSoure,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="problemType != null" >
+        #{problemType,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbakeConten != null" >
+        #{feedbakeConten,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbakeTime != null" >
+        #{feedbakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reple != null" >
+        #{reple,jdbcType=VARCHAR},
+      </if>
+      <if test="handlePeople != null" >
+        #{handlePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handleType != null" >
+        #{handleType,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.SysFeedbakeCriteria" resultType="java.lang.Integer" >
+    select count(*) from sys_feedbake
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_feedbake
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbakeSoure != null" >
+        FEEDBAKE_SOURE = #{record.feedbakeSoure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null" >
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.problemType != null" >
+        PROBLEM_TYPE = #{record.problemType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNum != null" >
+        PHONE_NUM = #{record.phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mail != null" >
+        MAIL = #{record.mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbakeConten != null" >
+        FEEDBAKE_CONTEN = #{record.feedbakeConten,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbakeTime != null" >
+        FEEDBAKE_TIME = #{record.feedbakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reple != null" >
+        REPLE = #{record.reple,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handlePeople != null" >
+        HANDLE_PEOPLE = #{record.handlePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleTime != null" >
+        HANDLE_TIME = #{record.handleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.handleType != null" >
+        HANDLE_TYPE = #{record.handleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_feedbake
+    set ID = #{record.id,jdbcType=VARCHAR},
+      FEEDBAKE_SOURE = #{record.feedbakeSoure,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      PROBLEM_TYPE = #{record.problemType,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      PHONE_NUM = #{record.phoneNum,jdbcType=VARCHAR},
+      MAIL = #{record.mail,jdbcType=VARCHAR},
+      FEEDBAKE_CONTEN = #{record.feedbakeConten,jdbcType=VARCHAR},
+      FEEDBAKE_TIME = #{record.feedbakeTime,jdbcType=TIMESTAMP},
+      REPLE = #{record.reple,jdbcType=VARCHAR},
+      HANDLE_PEOPLE = #{record.handlePeople,jdbcType=VARCHAR},
+      HANDLE_TIME = #{record.handleTime,jdbcType=TIMESTAMP},
+      HANDLE_TYPE = #{record.handleType,jdbcType=VARCHAR},
+      REMARKS = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.common.dao.mapper.bo.SysFeedbake" >
+    update sys_feedbake
+    <set >
+      <if test="feedbakeSoure != null" >
+        FEEDBAKE_SOURE = #{feedbakeSoure,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="problemType != null" >
+        PROBLEM_TYPE = #{problemType,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null" >
+        PHONE_NUM = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        MAIL = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbakeConten != null" >
+        FEEDBAKE_CONTEN = #{feedbakeConten,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbakeTime != null" >
+        FEEDBAKE_TIME = #{feedbakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reple != null" >
+        REPLE = #{reple,jdbcType=VARCHAR},
+      </if>
+      <if test="handlePeople != null" >
+        HANDLE_PEOPLE = #{handlePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        HANDLE_TIME = #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handleType != null" >
+        HANDLE_TYPE = #{handleType,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.common.dao.mapper.bo.SysFeedbake" >
+    update sys_feedbake
+    set FEEDBAKE_SOURE = #{feedbakeSoure,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      PROBLEM_TYPE = #{problemType,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      PHONE_NUM = #{phoneNum,jdbcType=VARCHAR},
+      MAIL = #{mail,jdbcType=VARCHAR},
+      FEEDBAKE_CONTEN = #{feedbakeConten,jdbcType=VARCHAR},
+      FEEDBAKE_TIME = #{feedbakeTime,jdbcType=TIMESTAMP},
+      REPLE = #{reple,jdbcType=VARCHAR},
+      HANDLE_PEOPLE = #{handlePeople,jdbcType=VARCHAR},
+      HANDLE_TIME = #{handleTime,jdbcType=TIMESTAMP},
+      HANDLE_TYPE = #{handleType,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

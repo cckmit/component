@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<bean id="dubboConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<!--<property name="locations" value="classpath:dubbo.properties" />-->
+	</bean>
+
+	<!-- 消费方 -->
+	<dubbo:application name="${x.dubbo.appname}" />
+	<dubbo:registry protocol="${x.dubbo.registry.protocol}"
+		address="${x.dubbo.registry.address}" id="slpRegistry" />
+	<!-- <dubbo:consumer timeout="${dubbo.provider.timeout}" /> -->
+
+	<context:component-scan base-package="com.x.centra" />
+	<!-- 标准品服务 -->
+	<dubbo:reference id="iNormProductSV" interface="com.x.centra.product.api.normproduct.interfaces.INormProductSV"
+					 registry="slpRegistry"/>
+	<!-- 属性管理 -->
+	<dubbo:reference id="iAttrAndValDefSV" interface="com.x.centra.product.api.productcat.interfaces.IAttrAndValDefSV"
+					 registry="slpRegistry"/>
+	<!-- 商品类目 -->
+	<dubbo:reference id="iProductCatSV" interface="com.x.centra.product.api.productcat.interfaces.IProductCatSV"
+					 registry="slpRegistry"/>
+	<!-- 商品管理 -->
+	<dubbo:reference id="iProductManagerSV" interface="com.x.centra.product.api.product.interfaces.IProductManagerSV"
+					 registry="slpRegistry"/>
+	<!-- 商品服务 -->
+	<dubbo:reference id="iProductSV" interface="com.x.centra.product.api.product.interfaces.IProductSV"
+					 registry="slpRegistry"/>
+	<!-- 公共缓存 -->
+	<dubbo:reference id="iCacheSV" interface="com.x.common.api.cache.interfaces.ICacheSV"
+					 registry="slpRegistry"/>
+	<!-- 组织机构用户 -->
+	<!-- <dubbo:reference id="iUcKeyInfoSV" interface="com.ai.slp.user.api.keyinfo.interfaces.IUcKeyInfoSV"
+					 registry="slpRegistry"/> -->
+	<!-- 库存服务 -->
+	<dubbo:reference id="iStorageSV" interface="com.x.centra.product.api.storage.interfaces.IStorageSV"
+					 registry="slpRegistry"/>
+	<!-- 刷新数据 -->
+	<dubbo:reference id="iFlushDataSV" interface="com.x.centra.product.api.flushdata.interfaces.IFlushDataSV"
+					 registry="slpRegistry"/>
+	<!-- 刷新数据 -->
+	<dubbo:reference id="iCreateDataBatSV" interface="com.x.centra.product.api.flushdata.interfaces.ICreateDataBatSV"
+					 registry="slpRegistry"/>
+	<!-- 用户查询服务 -->
+	<dubbo:reference id="iSysUserQuerySV" interface="com.x.common.api.sysuser.interfaces.ISysUserQuerySV"
+					 registry="slpRegistry"/>
+	<!-- 客户管理 -->
+	<dubbo:reference id="iCustNCarSV" interface="com.x.centra.customer.api.custncar.interfaces.ICustNCarSV"
+					 registry="slpRegistry"/><!-- 客户管理 -->
+	<dubbo:reference id="ICustFeedbackSV" interface="com.x.centra.customer.api.feedback.interfaces.ICustFeedbackSV"
+					 registry="slpRegistry"/>
+	<!-- 仓库管理服务 -->
+	<!--<dubbo:reference id="iRouteProdSupplyManageSV" interface="com.ai.slp.route.api.routeprodsupplymanage.interfaces.IRouteProdSupplyManageSV"-->
+					 <!--registry="slpRegistry"/>-->
+	<!-- 商品评价 -->
+	<dubbo:reference id="iProdCommentManagerSV" interface="com.x.centra.product.api.productcomment.interfaces.IProdCommentManagerSV"
+					 registry="slpRegistry"/>
+	
+	<!-- 权益管理 -->
+	<dubbo:reference id="iCustDiscountSV" interface="com.x.centra.dst.api.discount.interfaces.ICustDiscountSV"
+					 registry="slpRegistry"/>
+	<dubbo:reference id="iDiscountManagementSV" interface="com.x.centra.dst.api.discount.interfaces.IDiscountManagementSV"
+					 registry="slpRegistry"/>
+	<!-- 级别管理 -->
+	<dubbo:reference id="iDstDiscountLevelSV" interface="com.x.centra.dst.api.discountlevel.interfaces.IDstDiscountLevelSV"
+					 registry="slpRegistry"/>
+					 
+	 <dubbo:reference id="iQueryImportLogSV" interface="com.x.ic.smc.api.queryimportlog.interfaces.IQueryImportLogSV"
+	 registry="slpRegistry"/>
+	 <dubbo:reference id="iStreamFileInputSV" interface="com.x.ic.smc.api.streamfilemanage.interfaces.IStreamFileInputSV"
+	 registry="slpRegistry"/>
+	 <dubbo:reference id="iBillDetailSV" interface="com.x.ic.smc.api.billdetail.interfaces.IBillDetailSV"
+	 registry="slpRegistry"/>
+	<!-- 仓库服务 -->
+	<!--<dubbo:reference id="iRouteItemManageSV" interface="com.ai.slp.route.api.routeitemmanage.interfaces.IRouteItemManageSV"-->
+					 <!--registry="slpRegistry"/>-->
+	<!-- 仓库服务 -->
+	<!--<dubbo:reference id="iRouteTargetAreaSV" interface="com.ai.slp.route.api.routetargetarea.interfaces.IRouteTargetAreaSV"-->
+					 <!--registry="slpRegistry"/>-->
+	<!--公共管理  -->		 
+	<!--<dubbo:reference id="iSysMenuQuerySV"-->
+	<!--interface="com.ai.platform.common.api.menu.interfaces.ISysMenuQuerySV"-->
+	<!-- <registry="slpRegistry" /> -->
+					 
+</beans>

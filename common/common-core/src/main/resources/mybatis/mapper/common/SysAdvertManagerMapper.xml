@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.SysAdvertManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.SysAdvertManager" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+    <result column="advertising_position" property="advertisingPosition" jdbcType="VARCHAR" />
+    <result column="advertising_name" property="advertisingName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="thumbnail_id" property="thumbnailId" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="aditor" property="aditor" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="updateaditor" property="updateaditor" jdbcType="VARCHAR" />
+    <result column="click_rate" property="clickRate" jdbcType="BIGINT" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="regional_language" property="regionalLanguage" jdbcType="VARCHAR" />
+    <result column="advertising_type" property="advertisingType" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, site, advertising_position, advertising_name, description, thumbnail_id, state, 
+    aditor, create_time, update_time, updateaditor, click_rate, url, regional_language, 
+    advertising_type, sort
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.SysAdvertManagerCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_advert_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_advert_manager
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_advert_manager
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.SysAdvertManagerCriteria" >
+    delete from sys_advert_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.SysAdvertManager" >
+    insert into sys_advert_manager (id, site, advertising_position, 
+      advertising_name, description, thumbnail_id, 
+      state, aditor, create_time, 
+      update_time, updateaditor, click_rate, 
+      url, regional_language, advertising_type, 
+      sort)
+    values (#{id,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, #{advertisingPosition,jdbcType=VARCHAR}, 
+      #{advertisingName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{thumbnailId,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{aditor,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateaditor,jdbcType=VARCHAR}, #{clickRate,jdbcType=BIGINT}, 
+      #{url,jdbcType=VARCHAR}, #{regionalLanguage,jdbcType=VARCHAR}, #{advertisingType,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.SysAdvertManager" >
+    insert into sys_advert_manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="site != null" >
+        site,
+      </if>
+      <if test="advertisingPosition != null" >
+        advertising_position,
+      </if>
+      <if test="advertisingName != null" >
+        advertising_name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="thumbnailId != null" >
+        thumbnail_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="aditor != null" >
+        aditor,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateaditor != null" >
+        updateaditor,
+      </if>
+      <if test="clickRate != null" >
+        click_rate,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="regionalLanguage != null" >
+        regional_language,
+      </if>
+      <if test="advertisingType != null" >
+        advertising_type,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingPosition != null" >
+        #{advertisingPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingName != null" >
+        #{advertisingName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailId != null" >
+        #{thumbnailId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="aditor != null" >
+        #{aditor,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateaditor != null" >
+        #{updateaditor,jdbcType=VARCHAR},
+      </if>
+      <if test="clickRate != null" >
+        #{clickRate,jdbcType=BIGINT},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="regionalLanguage != null" >
+        #{regionalLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingType != null" >
+        #{advertisingType,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.SysAdvertManagerCriteria" resultType="java.lang.Integer" >
+    select count(*) from sys_advert_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_advert_manager
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.site != null" >
+        site = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advertisingPosition != null" >
+        advertising_position = #{record.advertisingPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advertisingName != null" >
+        advertising_name = #{record.advertisingName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thumbnailId != null" >
+        thumbnail_id = #{record.thumbnailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aditor != null" >
+        aditor = #{record.aditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateaditor != null" >
+        updateaditor = #{record.updateaditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clickRate != null" >
+        click_rate = #{record.clickRate,jdbcType=BIGINT},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionalLanguage != null" >
+        regional_language = #{record.regionalLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advertisingType != null" >
+        advertising_type = #{record.advertisingType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_advert_manager
+    set id = #{record.id,jdbcType=VARCHAR},
+      site = #{record.site,jdbcType=VARCHAR},
+      advertising_position = #{record.advertisingPosition,jdbcType=VARCHAR},
+      advertising_name = #{record.advertisingName,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      thumbnail_id = #{record.thumbnailId,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      aditor = #{record.aditor,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      updateaditor = #{record.updateaditor,jdbcType=VARCHAR},
+      click_rate = #{record.clickRate,jdbcType=BIGINT},
+      url = #{record.url,jdbcType=VARCHAR},
+      regional_language = #{record.regionalLanguage,jdbcType=VARCHAR},
+      advertising_type = #{record.advertisingType,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.common.dao.mapper.bo.SysAdvertManager" >
+    update sys_advert_manager
+    <set >
+      <if test="site != null" >
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingPosition != null" >
+        advertising_position = #{advertisingPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingName != null" >
+        advertising_name = #{advertisingName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailId != null" >
+        thumbnail_id = #{thumbnailId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="aditor != null" >
+        aditor = #{aditor,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateaditor != null" >
+        updateaditor = #{updateaditor,jdbcType=VARCHAR},
+      </if>
+      <if test="clickRate != null" >
+        click_rate = #{clickRate,jdbcType=BIGINT},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="regionalLanguage != null" >
+        regional_language = #{regionalLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingType != null" >
+        advertising_type = #{advertisingType,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.common.dao.mapper.bo.SysAdvertManager" >
+    update sys_advert_manager
+    set site = #{site,jdbcType=VARCHAR},
+      advertising_position = #{advertisingPosition,jdbcType=VARCHAR},
+      advertising_name = #{advertisingName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      thumbnail_id = #{thumbnailId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      aditor = #{aditor,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updateaditor = #{updateaditor,jdbcType=VARCHAR},
+      click_rate = #{clickRate,jdbcType=BIGINT},
+      url = #{url,jdbcType=VARCHAR},
+      regional_language = #{regionalLanguage,jdbcType=VARCHAR},
+      advertising_type = #{advertisingType,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

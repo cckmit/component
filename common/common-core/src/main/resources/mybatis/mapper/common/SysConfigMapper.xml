@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.SysConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.SysConfig" >
+    <id column="config_id" property="configId" jdbcType="VARCHAR" />
+    <result column="ordinary_member" property="ordinaryMember" jdbcType="VARCHAR" />
+    <result column="gold_member" property="goldMember" jdbcType="VARCHAR" />
+    <result column="platinum_member" property="platinumMember" jdbcType="VARCHAR" />
+    <result column="masonry_member" property="masonryMember" jdbcType="VARCHAR" />
+    <result column="cap_value" property="capValue" jdbcType="VARCHAR" />
+    <result column="v1_points" property="v1Points" jdbcType="VARCHAR" />
+    <result column="v2_points" property="v2Points" jdbcType="VARCHAR" />
+    <result column="v3_points" property="v3Points" jdbcType="VARCHAR" />
+    <result column="lsp_points" property="lspPoints" jdbcType="VARCHAR" />
+    <result column="lgdata_num" property="lgdataNum" jdbcType="VARCHAR" />
+    <result column="custom_num" property="customNum" jdbcType="VARCHAR" />
+    <result column="Interpreter_num" property="interpreterNum" jdbcType="VARCHAR" />
+    <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+    <result column="language_num" property="languageNum" jdbcType="VARCHAR" />
+    <result column="oneday" property="oneday" jdbcType="VARCHAR" />
+    <result column="twoday" property="twoday" jdbcType="VARCHAR" />
+    <result column="threeday" property="threeday" jdbcType="VARCHAR" />
+    <result column="fourday" property="fourday" jdbcType="VARCHAR" />
+    <result column="fiveday" property="fiveday" jdbcType="VARCHAR" />
+    <result column="sixday" property="sixday" jdbcType="VARCHAR" />
+    <result column="sevenday" property="sevenday" jdbcType="VARCHAR" />
+    <result column="eightday" property="eightday" jdbcType="VARCHAR" />
+    <result column="reg_onoff" property="regOnoff" jdbcType="VARCHAR" />
+    <result column="reg_integration" property="regIntegration" jdbcType="VARCHAR" />
+    <result column="reg_growth" property="regGrowth" jdbcType="VARCHAR" />
+    <result column="invite_integrati" property="inviteIntegrati" jdbcType="VARCHAR" />
+    <result column="rstate" property="rstate" jdbcType="VARCHAR" />
+    <result column="gstate" property="gstate" jdbcType="VARCHAR" />
+    <result column="istate" property="istate" jdbcType="VARCHAR" />
+    <result column="PC_NOTICE" property="pcNotice" jdbcType="VARCHAR" />
+    <result column="WAP_NOTICE" property="wapNotice" jdbcType="VARCHAR" />
+    <result column="lstate" property="lstate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    config_id, ordinary_member, gold_member, platinum_member, masonry_member, cap_value, 
+    v1_points, v2_points, v3_points, lsp_points, lgdata_num, custom_num, Interpreter_num, 
+    order_num, language_num, oneday, twoday, threeday, fourday, fiveday, sixday, sevenday, 
+    eightday, reg_onoff, reg_integration, reg_growth, invite_integrati, rstate, gstate, 
+    istate, PC_NOTICE, WAP_NOTICE, lstate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.SysConfigCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_config
+    where config_id = #{configId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_config
+    where config_id = #{configId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.SysConfigCriteria" >
+    delete from sys_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.SysConfig" >
+    insert into sys_config (config_id, ordinary_member, gold_member, 
+      platinum_member, masonry_member, cap_value, 
+      v1_points, v2_points, v3_points, 
+      lsp_points, lgdata_num, custom_num, 
+      Interpreter_num, order_num, language_num, 
+      oneday, twoday, threeday, 
+      fourday, fiveday, sixday, 
+      sevenday, eightday, reg_onoff, 
+      reg_integration, reg_growth, invite_integrati, 
+      rstate, gstate, istate, 
+      PC_NOTICE, WAP_NOTICE, lstate
+      )
+    values (#{configId,jdbcType=VARCHAR}, #{ordinaryMember,jdbcType=VARCHAR}, #{goldMember,jdbcType=VARCHAR}, 
+      #{platinumMember,jdbcType=VARCHAR}, #{masonryMember,jdbcType=VARCHAR}, #{capValue,jdbcType=VARCHAR}, 
+      #{v1Points,jdbcType=VARCHAR}, #{v2Points,jdbcType=VARCHAR}, #{v3Points,jdbcType=VARCHAR}, 
+      #{lspPoints,jdbcType=VARCHAR}, #{lgdataNum,jdbcType=VARCHAR}, #{customNum,jdbcType=VARCHAR}, 
+      #{interpreterNum,jdbcType=VARCHAR}, #{orderNum,jdbcType=VARCHAR}, #{languageNum,jdbcType=VARCHAR}, 
+      #{oneday,jdbcType=VARCHAR}, #{twoday,jdbcType=VARCHAR}, #{threeday,jdbcType=VARCHAR}, 
+      #{fourday,jdbcType=VARCHAR}, #{fiveday,jdbcType=VARCHAR}, #{sixday,jdbcType=VARCHAR}, 
+      #{sevenday,jdbcType=VARCHAR}, #{eightday,jdbcType=VARCHAR}, #{regOnoff,jdbcType=VARCHAR}, 
+      #{regIntegration,jdbcType=VARCHAR}, #{regGrowth,jdbcType=VARCHAR}, #{inviteIntegrati,jdbcType=VARCHAR}, 
+      #{rstate,jdbcType=VARCHAR}, #{gstate,jdbcType=VARCHAR}, #{istate,jdbcType=VARCHAR}, 
+      #{pcNotice,jdbcType=VARCHAR}, #{wapNotice,jdbcType=VARCHAR}, #{lstate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.SysConfig" >
+    insert into sys_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="configId != null" >
+        config_id,
+      </if>
+      <if test="ordinaryMember != null" >
+        ordinary_member,
+      </if>
+      <if test="goldMember != null" >
+        gold_member,
+      </if>
+      <if test="platinumMember != null" >
+        platinum_member,
+      </if>
+      <if test="masonryMember != null" >
+        masonry_member,
+      </if>
+      <if test="capValue != null" >
+        cap_value,
+      </if>
+      <if test="v1Points != null" >
+        v1_points,
+      </if>
+      <if test="v2Points != null" >
+        v2_points,
+      </if>
+      <if test="v3Points != null" >
+        v3_points,
+      </if>
+      <if test="lspPoints != null" >
+        lsp_points,
+      </if>
+      <if test="lgdataNum != null" >
+        lgdata_num,
+      </if>
+      <if test="customNum != null" >
+        custom_num,
+      </if>
+      <if test="interpreterNum != null" >
+        Interpreter_num,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="languageNum != null" >
+        language_num,
+      </if>
+      <if test="oneday != null" >
+        oneday,
+      </if>
+      <if test="twoday != null" >
+        twoday,
+      </if>
+      <if test="threeday != null" >
+        threeday,
+      </if>
+      <if test="fourday != null" >
+        fourday,
+      </if>
+      <if test="fiveday != null" >
+        fiveday,
+      </if>
+      <if test="sixday != null" >
+        sixday,
+      </if>
+      <if test="sevenday != null" >
+        sevenday,
+      </if>
+      <if test="eightday != null" >
+        eightday,
+      </if>
+      <if test="regOnoff != null" >
+        reg_onoff,
+      </if>
+      <if test="regIntegration != null" >
+        reg_integration,
+      </if>
+      <if test="regGrowth != null" >
+        reg_growth,
+      </if>
+      <if test="inviteIntegrati != null" >
+        invite_integrati,
+      </if>
+      <if test="rstate != null" >
+        rstate,
+      </if>
+      <if test="gstate != null" >
+        gstate,
+      </if>
+      <if test="istate != null" >
+        istate,
+      </if>
+      <if test="pcNotice != null" >
+        PC_NOTICE,
+      </if>
+      <if test="wapNotice != null" >
+        WAP_NOTICE,
+      </if>
+      <if test="lstate != null" >
+        lstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="configId != null" >
+        #{configId,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinaryMember != null" >
+        #{ordinaryMember,jdbcType=VARCHAR},
+      </if>
+      <if test="goldMember != null" >
+        #{goldMember,jdbcType=VARCHAR},
+      </if>
+      <if test="platinumMember != null" >
+        #{platinumMember,jdbcType=VARCHAR},
+      </if>
+      <if test="masonryMember != null" >
+        #{masonryMember,jdbcType=VARCHAR},
+      </if>
+      <if test="capValue != null" >
+        #{capValue,jdbcType=VARCHAR},
+      </if>
+      <if test="v1Points != null" >
+        #{v1Points,jdbcType=VARCHAR},
+      </if>
+      <if test="v2Points != null" >
+        #{v2Points,jdbcType=VARCHAR},
+      </if>
+      <if test="v3Points != null" >
+        #{v3Points,jdbcType=VARCHAR},
+      </if>
+      <if test="lspPoints != null" >
+        #{lspPoints,jdbcType=VARCHAR},
+      </if>
+      <if test="lgdataNum != null" >
+        #{lgdataNum,jdbcType=VARCHAR},
+      </if>
+      <if test="customNum != null" >
+        #{customNum,jdbcType=VARCHAR},
+      </if>
+      <if test="interpreterNum != null" >
+        #{interpreterNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="languageNum != null" >
+        #{languageNum,jdbcType=VARCHAR},
+      </if>
+      <if test="oneday != null" >
+        #{oneday,jdbcType=VARCHAR},
+      </if>
+      <if test="twoday != null" >
+        #{twoday,jdbcType=VARCHAR},
+      </if>
+      <if test="threeday != null" >
+        #{threeday,jdbcType=VARCHAR},
+      </if>
+      <if test="fourday != null" >
+        #{fourday,jdbcType=VARCHAR},
+      </if>
+      <if test="fiveday != null" >
+        #{fiveday,jdbcType=VARCHAR},
+      </if>
+      <if test="sixday != null" >
+        #{sixday,jdbcType=VARCHAR},
+      </if>
+      <if test="sevenday != null" >
+        #{sevenday,jdbcType=VARCHAR},
+      </if>
+      <if test="eightday != null" >
+        #{eightday,jdbcType=VARCHAR},
+      </if>
+      <if test="regOnoff != null" >
+        #{regOnoff,jdbcType=VARCHAR},
+      </if>
+      <if test="regIntegration != null" >
+        #{regIntegration,jdbcType=VARCHAR},
+      </if>
+      <if test="regGrowth != null" >
+        #{regGrowth,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteIntegrati != null" >
+        #{inviteIntegrati,jdbcType=VARCHAR},
+      </if>
+      <if test="rstate != null" >
+        #{rstate,jdbcType=VARCHAR},
+      </if>
+      <if test="gstate != null" >
+        #{gstate,jdbcType=VARCHAR},
+      </if>
+      <if test="istate != null" >
+        #{istate,jdbcType=VARCHAR},
+      </if>
+      <if test="pcNotice != null" >
+        #{pcNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="wapNotice != null" >
+        #{wapNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="lstate != null" >
+        #{lstate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.SysConfigCriteria" resultType="java.lang.Integer" >
+    select count(*) from sys_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_config
+    <set >
+      <if test="record.configId != null" >
+        config_id = #{record.configId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordinaryMember != null" >
+        ordinary_member = #{record.ordinaryMember,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goldMember != null" >
+        gold_member = #{record.goldMember,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platinumMember != null" >
+        platinum_member = #{record.platinumMember,jdbcType=VARCHAR},
+      </if>
+      <if test="record.masonryMember != null" >
+        masonry_member = #{record.masonryMember,jdbcType=VARCHAR},
+      </if>
+      <if test="record.capValue != null" >
+        cap_value = #{record.capValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.v1Points != null" >
+        v1_points = #{record.v1Points,jdbcType=VARCHAR},
+      </if>
+      <if test="record.v2Points != null" >
+        v2_points = #{record.v2Points,jdbcType=VARCHAR},
+      </if>
+      <if test="record.v3Points != null" >
+        v3_points = #{record.v3Points,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lspPoints != null" >
+        lsp_points = #{record.lspPoints,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lgdataNum != null" >
+        lgdata_num = #{record.lgdataNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customNum != null" >
+        custom_num = #{record.customNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interpreterNum != null" >
+        Interpreter_num = #{record.interpreterNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNum != null" >
+        order_num = #{record.orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.languageNum != null" >
+        language_num = #{record.languageNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oneday != null" >
+        oneday = #{record.oneday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.twoday != null" >
+        twoday = #{record.twoday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threeday != null" >
+        threeday = #{record.threeday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourday != null" >
+        fourday = #{record.fourday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fiveday != null" >
+        fiveday = #{record.fiveday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sixday != null" >
+        sixday = #{record.sixday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sevenday != null" >
+        sevenday = #{record.sevenday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eightday != null" >
+        eightday = #{record.eightday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regOnoff != null" >
+        reg_onoff = #{record.regOnoff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regIntegration != null" >
+        reg_integration = #{record.regIntegration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regGrowth != null" >
+        reg_growth = #{record.regGrowth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inviteIntegrati != null" >
+        invite_integrati = #{record.inviteIntegrati,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rstate != null" >
+        rstate = #{record.rstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gstate != null" >
+        gstate = #{record.gstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istate != null" >
+        istate = #{record.istate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcNotice != null" >
+        PC_NOTICE = #{record.pcNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wapNotice != null" >
+        WAP_NOTICE = #{record.wapNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lstate != null" >
+        lstate = #{record.lstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_config
+    set config_id = #{record.configId,jdbcType=VARCHAR},
+      ordinary_member = #{record.ordinaryMember,jdbcType=VARCHAR},
+      gold_member = #{record.goldMember,jdbcType=VARCHAR},
+      platinum_member = #{record.platinumMember,jdbcType=VARCHAR},
+      masonry_member = #{record.masonryMember,jdbcType=VARCHAR},
+      cap_value = #{record.capValue,jdbcType=VARCHAR},
+      v1_points = #{record.v1Points,jdbcType=VARCHAR},
+      v2_points = #{record.v2Points,jdbcType=VARCHAR},
+      v3_points = #{record.v3Points,jdbcType=VARCHAR},
+      lsp_points = #{record.lspPoints,jdbcType=VARCHAR},
+      lgdata_num = #{record.lgdataNum,jdbcType=VARCHAR},
+      custom_num = #{record.customNum,jdbcType=VARCHAR},
+      Interpreter_num = #{record.interpreterNum,jdbcType=VARCHAR},
+      order_num = #{record.orderNum,jdbcType=VARCHAR},
+      language_num = #{record.languageNum,jdbcType=VARCHAR},
+      oneday = #{record.oneday,jdbcType=VARCHAR},
+      twoday = #{record.twoday,jdbcType=VARCHAR},
+      threeday = #{record.threeday,jdbcType=VARCHAR},
+      fourday = #{record.fourday,jdbcType=VARCHAR},
+      fiveday = #{record.fiveday,jdbcType=VARCHAR},
+      sixday = #{record.sixday,jdbcType=VARCHAR},
+      sevenday = #{record.sevenday,jdbcType=VARCHAR},
+      eightday = #{record.eightday,jdbcType=VARCHAR},
+      reg_onoff = #{record.regOnoff,jdbcType=VARCHAR},
+      reg_integration = #{record.regIntegration,jdbcType=VARCHAR},
+      reg_growth = #{record.regGrowth,jdbcType=VARCHAR},
+      invite_integrati = #{record.inviteIntegrati,jdbcType=VARCHAR},
+      rstate = #{record.rstate,jdbcType=VARCHAR},
+      gstate = #{record.gstate,jdbcType=VARCHAR},
+      istate = #{record.istate,jdbcType=VARCHAR},
+      PC_NOTICE = #{record.pcNotice,jdbcType=VARCHAR},
+      WAP_NOTICE = #{record.wapNotice,jdbcType=VARCHAR},
+      lstate = #{record.lstate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.common.dao.mapper.bo.SysConfig" >
+    update sys_config
+    <set >
+      <if test="ordinaryMember != null" >
+        ordinary_member = #{ordinaryMember,jdbcType=VARCHAR},
+      </if>
+      <if test="goldMember != null" >
+        gold_member = #{goldMember,jdbcType=VARCHAR},
+      </if>
+      <if test="platinumMember != null" >
+        platinum_member = #{platinumMember,jdbcType=VARCHAR},
+      </if>
+      <if test="masonryMember != null" >
+        masonry_member = #{masonryMember,jdbcType=VARCHAR},
+      </if>
+      <if test="capValue != null" >
+        cap_value = #{capValue,jdbcType=VARCHAR},
+      </if>
+      <if test="v1Points != null" >
+        v1_points = #{v1Points,jdbcType=VARCHAR},
+      </if>
+      <if test="v2Points != null" >
+        v2_points = #{v2Points,jdbcType=VARCHAR},
+      </if>
+      <if test="v3Points != null" >
+        v3_points = #{v3Points,jdbcType=VARCHAR},
+      </if>
+      <if test="lspPoints != null" >
+        lsp_points = #{lspPoints,jdbcType=VARCHAR},
+      </if>
+      <if test="lgdataNum != null" >
+        lgdata_num = #{lgdataNum,jdbcType=VARCHAR},
+      </if>
+      <if test="customNum != null" >
+        custom_num = #{customNum,jdbcType=VARCHAR},
+      </if>
+      <if test="interpreterNum != null" >
+        Interpreter_num = #{interpreterNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="languageNum != null" >
+        language_num = #{languageNum,jdbcType=VARCHAR},
+      </if>
+      <if test="oneday != null" >
+        oneday = #{oneday,jdbcType=VARCHAR},
+      </if>
+      <if test="twoday != null" >
+        twoday = #{twoday,jdbcType=VARCHAR},
+      </if>
+      <if test="threeday != null" >
+        threeday = #{threeday,jdbcType=VARCHAR},
+      </if>
+      <if test="fourday != null" >
+        fourday = #{fourday,jdbcType=VARCHAR},
+      </if>
+      <if test="fiveday != null" >
+        fiveday = #{fiveday,jdbcType=VARCHAR},
+      </if>
+      <if test="sixday != null" >
+        sixday = #{sixday,jdbcType=VARCHAR},
+      </if>
+      <if test="sevenday != null" >
+        sevenday = #{sevenday,jdbcType=VARCHAR},
+      </if>
+      <if test="eightday != null" >
+        eightday = #{eightday,jdbcType=VARCHAR},
+      </if>
+      <if test="regOnoff != null" >
+        reg_onoff = #{regOnoff,jdbcType=VARCHAR},
+      </if>
+      <if test="regIntegration != null" >
+        reg_integration = #{regIntegration,jdbcType=VARCHAR},
+      </if>
+      <if test="regGrowth != null" >
+        reg_growth = #{regGrowth,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteIntegrati != null" >
+        invite_integrati = #{inviteIntegrati,jdbcType=VARCHAR},
+      </if>
+      <if test="rstate != null" >
+        rstate = #{rstate,jdbcType=VARCHAR},
+      </if>
+      <if test="gstate != null" >
+        gstate = #{gstate,jdbcType=VARCHAR},
+      </if>
+      <if test="istate != null" >
+        istate = #{istate,jdbcType=VARCHAR},
+      </if>
+      <if test="pcNotice != null" >
+        PC_NOTICE = #{pcNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="wapNotice != null" >
+        WAP_NOTICE = #{wapNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="lstate != null" >
+        lstate = #{lstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where config_id = #{configId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.common.dao.mapper.bo.SysConfig" >
+    update sys_config
+    set ordinary_member = #{ordinaryMember,jdbcType=VARCHAR},
+      gold_member = #{goldMember,jdbcType=VARCHAR},
+      platinum_member = #{platinumMember,jdbcType=VARCHAR},
+      masonry_member = #{masonryMember,jdbcType=VARCHAR},
+      cap_value = #{capValue,jdbcType=VARCHAR},
+      v1_points = #{v1Points,jdbcType=VARCHAR},
+      v2_points = #{v2Points,jdbcType=VARCHAR},
+      v3_points = #{v3Points,jdbcType=VARCHAR},
+      lsp_points = #{lspPoints,jdbcType=VARCHAR},
+      lgdata_num = #{lgdataNum,jdbcType=VARCHAR},
+      custom_num = #{customNum,jdbcType=VARCHAR},
+      Interpreter_num = #{interpreterNum,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=VARCHAR},
+      language_num = #{languageNum,jdbcType=VARCHAR},
+      oneday = #{oneday,jdbcType=VARCHAR},
+      twoday = #{twoday,jdbcType=VARCHAR},
+      threeday = #{threeday,jdbcType=VARCHAR},
+      fourday = #{fourday,jdbcType=VARCHAR},
+      fiveday = #{fiveday,jdbcType=VARCHAR},
+      sixday = #{sixday,jdbcType=VARCHAR},
+      sevenday = #{sevenday,jdbcType=VARCHAR},
+      eightday = #{eightday,jdbcType=VARCHAR},
+      reg_onoff = #{regOnoff,jdbcType=VARCHAR},
+      reg_integration = #{regIntegration,jdbcType=VARCHAR},
+      reg_growth = #{regGrowth,jdbcType=VARCHAR},
+      invite_integrati = #{inviteIntegrati,jdbcType=VARCHAR},
+      rstate = #{rstate,jdbcType=VARCHAR},
+      gstate = #{gstate,jdbcType=VARCHAR},
+      istate = #{istate,jdbcType=VARCHAR},
+      PC_NOTICE = #{pcNotice,jdbcType=VARCHAR},
+      WAP_NOTICE = #{wapNotice,jdbcType=VARCHAR},
+      lstate = #{lstate,jdbcType=VARCHAR}
+    where config_id = #{configId,jdbcType=VARCHAR}
+  </update>
+</mapper>

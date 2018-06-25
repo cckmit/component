@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.SysMailInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.SysMailInformation" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="recipients" property="recipients" jdbcType="VARCHAR" />
+    <result column="contact_number" property="contactNumber" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="cn_city" property="cnCity" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="registered_address" property="registeredAddress" jdbcType="VARCHAR" />
+    <result column="registered_phone" property="registeredPhone" jdbcType="VARCHAR" />
+    <result column="bank_deposit" property="bankDeposit" jdbcType="VARCHAR" />
+    <result column="bank_account" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="identify_number" property="identifyNumber" jdbcType="VARCHAR" />
+    <result column="tax_page_id" property="taxPageId" jdbcType="VARCHAR" />
+    <result column="tax_certificate_id" property="taxCertificateId" jdbcType="VARCHAR" />
+    <result column="tax_certificate_upload_id" property="taxCertificateUploadId" jdbcType="VARCHAR" />
+    <result column="taxpayer_identification_id" property="taxpayerIdentificationId" jdbcType="VARCHAR" />
+    <result column="invoice_type" property="invoiceType" jdbcType="VARCHAR" />
+    <result column="invoice_title" property="invoiceTitle" jdbcType="VARCHAR" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, recipients, contact_number, province, country, cn_city, address, uid, registered_address, 
+    registered_phone, bank_deposit, bank_account, identify_number, tax_page_id, tax_certificate_id, 
+    tax_certificate_upload_id, taxpayer_identification_id, invoice_type, invoice_title, 
+    postcode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.SysMailInformationCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_mail_information
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_mail_information
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_mail_information
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.SysMailInformationCriteria" >
+    delete from sys_mail_information
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.SysMailInformation" >
+    insert into sys_mail_information (id, recipients, contact_number, 
+      province, country, cn_city, 
+      address, uid, registered_address, 
+      registered_phone, bank_deposit, bank_account, 
+      identify_number, tax_page_id, tax_certificate_id, 
+      tax_certificate_upload_id, taxpayer_identification_id, 
+      invoice_type, invoice_title, postcode
+      )
+    values (#{id,jdbcType=VARCHAR}, #{recipients,jdbcType=VARCHAR}, #{contactNumber,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{cnCity,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{registeredAddress,jdbcType=VARCHAR}, 
+      #{registeredPhone,jdbcType=VARCHAR}, #{bankDeposit,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, 
+      #{identifyNumber,jdbcType=VARCHAR}, #{taxPageId,jdbcType=VARCHAR}, #{taxCertificateId,jdbcType=VARCHAR}, 
+      #{taxCertificateUploadId,jdbcType=VARCHAR}, #{taxpayerIdentificationId,jdbcType=VARCHAR}, 
+      #{invoiceType,jdbcType=VARCHAR}, #{invoiceTitle,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.SysMailInformation" >
+    insert into sys_mail_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recipients != null" >
+        recipients,
+      </if>
+      <if test="contactNumber != null" >
+        contact_number,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="cnCity != null" >
+        cn_city,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="registeredAddress != null" >
+        registered_address,
+      </if>
+      <if test="registeredPhone != null" >
+        registered_phone,
+      </if>
+      <if test="bankDeposit != null" >
+        bank_deposit,
+      </if>
+      <if test="bankAccount != null" >
+        bank_account,
+      </if>
+      <if test="identifyNumber != null" >
+        identify_number,
+      </if>
+      <if test="taxPageId != null" >
+        tax_page_id,
+      </if>
+      <if test="taxCertificateId != null" >
+        tax_certificate_id,
+      </if>
+      <if test="taxCertificateUploadId != null" >
+        tax_certificate_upload_id,
+      </if>
+      <if test="taxpayerIdentificationId != null" >
+        taxpayer_identification_id,
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type,
+      </if>
+      <if test="invoiceTitle != null" >
+        invoice_title,
+      </if>
+      <if test="postcode != null" >
+        postcode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="recipients != null" >
+        #{recipients,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null" >
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="cnCity != null" >
+        #{cnCity,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredAddress != null" >
+        #{registeredAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredPhone != null" >
+        #{registeredPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bankDeposit != null" >
+        #{bankDeposit,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyNumber != null" >
+        #{identifyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="taxPageId != null" >
+        #{taxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCertificateId != null" >
+        #{taxCertificateId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCertificateUploadId != null" >
+        #{taxCertificateUploadId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxpayerIdentificationId != null" >
+        #{taxpayerIdentificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null" >
+        #{invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTitle != null" >
+        #{invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.SysMailInformationCriteria" resultType="java.lang.Integer" >
+    select count(*) from sys_mail_information
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_mail_information
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recipients != null" >
+        recipients = #{record.recipients,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactNumber != null" >
+        contact_number = #{record.contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cnCity != null" >
+        cn_city = #{record.cnCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredAddress != null" >
+        registered_address = #{record.registeredAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredPhone != null" >
+        registered_phone = #{record.registeredPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankDeposit != null" >
+        bank_deposit = #{record.bankDeposit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccount != null" >
+        bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identifyNumber != null" >
+        identify_number = #{record.identifyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxPageId != null" >
+        tax_page_id = #{record.taxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCertificateId != null" >
+        tax_certificate_id = #{record.taxCertificateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxCertificateUploadId != null" >
+        tax_certificate_upload_id = #{record.taxCertificateUploadId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxpayerIdentificationId != null" >
+        taxpayer_identification_id = #{record.taxpayerIdentificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceType != null" >
+        invoice_type = #{record.invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceTitle != null" >
+        invoice_title = #{record.invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postcode != null" >
+        postcode = #{record.postcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_mail_information
+    set id = #{record.id,jdbcType=VARCHAR},
+      recipients = #{record.recipients,jdbcType=VARCHAR},
+      contact_number = #{record.contactNumber,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      cn_city = #{record.cnCity,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      registered_address = #{record.registeredAddress,jdbcType=VARCHAR},
+      registered_phone = #{record.registeredPhone,jdbcType=VARCHAR},
+      bank_deposit = #{record.bankDeposit,jdbcType=VARCHAR},
+      bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+      identify_number = #{record.identifyNumber,jdbcType=VARCHAR},
+      tax_page_id = #{record.taxPageId,jdbcType=VARCHAR},
+      tax_certificate_id = #{record.taxCertificateId,jdbcType=VARCHAR},
+      tax_certificate_upload_id = #{record.taxCertificateUploadId,jdbcType=VARCHAR},
+      taxpayer_identification_id = #{record.taxpayerIdentificationId,jdbcType=VARCHAR},
+      invoice_type = #{record.invoiceType,jdbcType=VARCHAR},
+      invoice_title = #{record.invoiceTitle,jdbcType=VARCHAR},
+      postcode = #{record.postcode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.common.dao.mapper.bo.SysMailInformation" >
+    update sys_mail_information
+    <set >
+      <if test="recipients != null" >
+        recipients = #{recipients,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null" >
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="cnCity != null" >
+        cn_city = #{cnCity,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredAddress != null" >
+        registered_address = #{registeredAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredPhone != null" >
+        registered_phone = #{registeredPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bankDeposit != null" >
+        bank_deposit = #{bankDeposit,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        bank_account = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyNumber != null" >
+        identify_number = #{identifyNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="taxPageId != null" >
+        tax_page_id = #{taxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCertificateId != null" >
+        tax_certificate_id = #{taxCertificateId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxCertificateUploadId != null" >
+        tax_certificate_upload_id = #{taxCertificateUploadId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxpayerIdentificationId != null" >
+        taxpayer_identification_id = #{taxpayerIdentificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null" >
+        invoice_type = #{invoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTitle != null" >
+        invoice_title = #{invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.common.dao.mapper.bo.SysMailInformation" >
+    update sys_mail_information
+    set recipients = #{recipients,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      cn_city = #{cnCity,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      registered_address = #{registeredAddress,jdbcType=VARCHAR},
+      registered_phone = #{registeredPhone,jdbcType=VARCHAR},
+      bank_deposit = #{bankDeposit,jdbcType=VARCHAR},
+      bank_account = #{bankAccount,jdbcType=VARCHAR},
+      identify_number = #{identifyNumber,jdbcType=VARCHAR},
+      tax_page_id = #{taxPageId,jdbcType=VARCHAR},
+      tax_certificate_id = #{taxCertificateId,jdbcType=VARCHAR},
+      tax_certificate_upload_id = #{taxCertificateUploadId,jdbcType=VARCHAR},
+      taxpayer_identification_id = #{taxpayerIdentificationId,jdbcType=VARCHAR},
+      invoice_type = #{invoiceType,jdbcType=VARCHAR},
+      invoice_title = #{invoiceTitle,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

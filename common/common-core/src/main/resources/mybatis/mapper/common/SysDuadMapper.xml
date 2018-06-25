@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.SysDuadMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.SysDuad" >
+    <id column="duad_id" property="duadId" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="CHAR" />
+    <result column="source_code" property="sourceCode" jdbcType="VARCHAR" />
+    <result column="source_cn" property="sourceCn" jdbcType="VARCHAR" />
+    <result column="source_en" property="sourceEn" jdbcType="VARCHAR" />
+    <result column="target_code" property="targetCode" jdbcType="VARCHAR" />
+    <result column="target_cn" property="targetCn" jdbcType="VARCHAR" />
+    <result column="target_en" property="targetEn" jdbcType="VARCHAR" />
+    <result column="ordinary" property="ordinary" jdbcType="VARCHAR" />
+    <result column="ordinary_urgent" property="ordinaryUrgent" jdbcType="VARCHAR" />
+    <result column="professional" property="professional" jdbcType="VARCHAR" />
+    <result column="professional_urgent" property="professionalUrgent" jdbcType="VARCHAR" />
+    <result column="publish" property="publish" jdbcType="VARCHAR" />
+    <result column="publish_urgent" property="publishUrgent" jdbcType="VARCHAR" />
+    <result column="ordinary_dollar" property="ordinaryDollar" jdbcType="VARCHAR" />
+    <result column="ourgent_dollar" property="ourgentDollar" jdbcType="VARCHAR" />
+    <result column="professional_dollar" property="professionalDollar" jdbcType="VARCHAR" />
+    <result column="purgent_dollar" property="purgentDollar" jdbcType="VARCHAR" />
+    <result column="publish_dollar" property="publishDollar" jdbcType="VARCHAR" />
+    <result column="puburgent_dollar" property="puburgentDollar" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="BIGINT" />
+    <result column="create_operator" property="createOperator" jdbcType="VARCHAR" />
+    <result column="create_operator_id" property="createOperatorId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    duad_id, language, site, order_type, source_code, source_cn, source_en, target_code, 
+    target_cn, target_en, ordinary, ordinary_urgent, professional, professional_urgent, 
+    publish, publish_urgent, ordinary_dollar, ourgent_dollar, professional_dollar, purgent_dollar, 
+    publish_dollar, puburgent_dollar, sort, state, updatetime, create_operator, create_operator_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.SysDuadCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_duad
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_duad
+    where duad_id = #{duadId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_duad
+    where duad_id = #{duadId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.SysDuadCriteria" >
+    delete from sys_duad
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.SysDuad" >
+    insert into sys_duad (duad_id, language, site, 
+      order_type, source_code, source_cn, 
+      source_en, target_code, target_cn, 
+      target_en, ordinary, ordinary_urgent, 
+      professional, professional_urgent, publish, 
+      publish_urgent, ordinary_dollar, ourgent_dollar, 
+      professional_dollar, purgent_dollar, publish_dollar, 
+      puburgent_dollar, sort, state, 
+      updatetime, create_operator, create_operator_id
+      )
+    values (#{duadId,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=CHAR}, #{sourceCode,jdbcType=VARCHAR}, #{sourceCn,jdbcType=VARCHAR}, 
+      #{sourceEn,jdbcType=VARCHAR}, #{targetCode,jdbcType=VARCHAR}, #{targetCn,jdbcType=VARCHAR}, 
+      #{targetEn,jdbcType=VARCHAR}, #{ordinary,jdbcType=VARCHAR}, #{ordinaryUrgent,jdbcType=VARCHAR}, 
+      #{professional,jdbcType=VARCHAR}, #{professionalUrgent,jdbcType=VARCHAR}, #{publish,jdbcType=VARCHAR}, 
+      #{publishUrgent,jdbcType=VARCHAR}, #{ordinaryDollar,jdbcType=VARCHAR}, #{ourgentDollar,jdbcType=VARCHAR}, 
+      #{professionalDollar,jdbcType=VARCHAR}, #{purgentDollar,jdbcType=VARCHAR}, #{publishDollar,jdbcType=VARCHAR}, 
+      #{puburgentDollar,jdbcType=VARCHAR}, #{sort,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, 
+      #{updatetime,jdbcType=BIGINT}, #{createOperator,jdbcType=VARCHAR}, #{createOperatorId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.SysDuad" >
+    insert into sys_duad
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="duadId != null" >
+        duad_id,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="site != null" >
+        site,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="sourceCode != null" >
+        source_code,
+      </if>
+      <if test="sourceCn != null" >
+        source_cn,
+      </if>
+      <if test="sourceEn != null" >
+        source_en,
+      </if>
+      <if test="targetCode != null" >
+        target_code,
+      </if>
+      <if test="targetCn != null" >
+        target_cn,
+      </if>
+      <if test="targetEn != null" >
+        target_en,
+      </if>
+      <if test="ordinary != null" >
+        ordinary,
+      </if>
+      <if test="ordinaryUrgent != null" >
+        ordinary_urgent,
+      </if>
+      <if test="professional != null" >
+        professional,
+      </if>
+      <if test="professionalUrgent != null" >
+        professional_urgent,
+      </if>
+      <if test="publish != null" >
+        publish,
+      </if>
+      <if test="publishUrgent != null" >
+        publish_urgent,
+      </if>
+      <if test="ordinaryDollar != null" >
+        ordinary_dollar,
+      </if>
+      <if test="ourgentDollar != null" >
+        ourgent_dollar,
+      </if>
+      <if test="professionalDollar != null" >
+        professional_dollar,
+      </if>
+      <if test="purgentDollar != null" >
+        purgent_dollar,
+      </if>
+      <if test="publishDollar != null" >
+        publish_dollar,
+      </if>
+      <if test="puburgentDollar != null" >
+        puburgent_dollar,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="createOperator != null" >
+        create_operator,
+      </if>
+      <if test="createOperatorId != null" >
+        create_operator_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="duadId != null" >
+        #{duadId,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=CHAR},
+      </if>
+      <if test="sourceCode != null" >
+        #{sourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceCn != null" >
+        #{sourceCn,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceEn != null" >
+        #{sourceEn,jdbcType=VARCHAR},
+      </if>
+      <if test="targetCode != null" >
+        #{targetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="targetCn != null" >
+        #{targetCn,jdbcType=VARCHAR},
+      </if>
+      <if test="targetEn != null" >
+        #{targetEn,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinary != null" >
+        #{ordinary,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinaryUrgent != null" >
+        #{ordinaryUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null" >
+        #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalUrgent != null" >
+        #{professionalUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null" >
+        #{publish,jdbcType=VARCHAR},
+      </if>
+      <if test="publishUrgent != null" >
+        #{publishUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinaryDollar != null" >
+        #{ordinaryDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="ourgentDollar != null" >
+        #{ourgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalDollar != null" >
+        #{professionalDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="purgentDollar != null" >
+        #{purgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDollar != null" >
+        #{publishDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="puburgentDollar != null" >
+        #{puburgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=BIGINT},
+      </if>
+      <if test="createOperator != null" >
+        #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperatorId != null" >
+        #{createOperatorId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.SysDuadCriteria" resultType="java.lang.Integer" >
+    select count(*) from sys_duad
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_duad
+    <set >
+      <if test="record.duadId != null" >
+        duad_id = #{record.duadId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.language != null" >
+        language = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.site != null" >
+        site = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderType != null" >
+        order_type = #{record.orderType,jdbcType=CHAR},
+      </if>
+      <if test="record.sourceCode != null" >
+        source_code = #{record.sourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceCn != null" >
+        source_cn = #{record.sourceCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceEn != null" >
+        source_en = #{record.sourceEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetCode != null" >
+        target_code = #{record.targetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetCn != null" >
+        target_cn = #{record.targetCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetEn != null" >
+        target_en = #{record.targetEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordinary != null" >
+        ordinary = #{record.ordinary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordinaryUrgent != null" >
+        ordinary_urgent = #{record.ordinaryUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professional != null" >
+        professional = #{record.professional,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professionalUrgent != null" >
+        professional_urgent = #{record.professionalUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publish != null" >
+        publish = #{record.publish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishUrgent != null" >
+        publish_urgent = #{record.publishUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordinaryDollar != null" >
+        ordinary_dollar = #{record.ordinaryDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ourgentDollar != null" >
+        ourgent_dollar = #{record.ourgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professionalDollar != null" >
+        professional_dollar = #{record.professionalDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purgentDollar != null" >
+        purgent_dollar = #{record.purgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishDollar != null" >
+        publish_dollar = #{record.publishDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.puburgentDollar != null" >
+        puburgent_dollar = #{record.puburgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=BIGINT},
+      </if>
+      <if test="record.createOperator != null" >
+        create_operator = #{record.createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createOperatorId != null" >
+        create_operator_id = #{record.createOperatorId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_duad
+    set duad_id = #{record.duadId,jdbcType=VARCHAR},
+      language = #{record.language,jdbcType=VARCHAR},
+      site = #{record.site,jdbcType=VARCHAR},
+      order_type = #{record.orderType,jdbcType=CHAR},
+      source_code = #{record.sourceCode,jdbcType=VARCHAR},
+      source_cn = #{record.sourceCn,jdbcType=VARCHAR},
+      source_en = #{record.sourceEn,jdbcType=VARCHAR},
+      target_code = #{record.targetCode,jdbcType=VARCHAR},
+      target_cn = #{record.targetCn,jdbcType=VARCHAR},
+      target_en = #{record.targetEn,jdbcType=VARCHAR},
+      ordinary = #{record.ordinary,jdbcType=VARCHAR},
+      ordinary_urgent = #{record.ordinaryUrgent,jdbcType=VARCHAR},
+      professional = #{record.professional,jdbcType=VARCHAR},
+      professional_urgent = #{record.professionalUrgent,jdbcType=VARCHAR},
+      publish = #{record.publish,jdbcType=VARCHAR},
+      publish_urgent = #{record.publishUrgent,jdbcType=VARCHAR},
+      ordinary_dollar = #{record.ordinaryDollar,jdbcType=VARCHAR},
+      ourgent_dollar = #{record.ourgentDollar,jdbcType=VARCHAR},
+      professional_dollar = #{record.professionalDollar,jdbcType=VARCHAR},
+      purgent_dollar = #{record.purgentDollar,jdbcType=VARCHAR},
+      publish_dollar = #{record.publishDollar,jdbcType=VARCHAR},
+      puburgent_dollar = #{record.puburgentDollar,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=CHAR},
+      updatetime = #{record.updatetime,jdbcType=BIGINT},
+      create_operator = #{record.createOperator,jdbcType=VARCHAR},
+      create_operator_id = #{record.createOperatorId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.common.dao.mapper.bo.SysDuad" >
+    update sys_duad
+    <set >
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=CHAR},
+      </if>
+      <if test="sourceCode != null" >
+        source_code = #{sourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceCn != null" >
+        source_cn = #{sourceCn,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceEn != null" >
+        source_en = #{sourceEn,jdbcType=VARCHAR},
+      </if>
+      <if test="targetCode != null" >
+        target_code = #{targetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="targetCn != null" >
+        target_cn = #{targetCn,jdbcType=VARCHAR},
+      </if>
+      <if test="targetEn != null" >
+        target_en = #{targetEn,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinary != null" >
+        ordinary = #{ordinary,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinaryUrgent != null" >
+        ordinary_urgent = #{ordinaryUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null" >
+        professional = #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalUrgent != null" >
+        professional_urgent = #{professionalUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null" >
+        publish = #{publish,jdbcType=VARCHAR},
+      </if>
+      <if test="publishUrgent != null" >
+        publish_urgent = #{publishUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinaryDollar != null" >
+        ordinary_dollar = #{ordinaryDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="ourgentDollar != null" >
+        ourgent_dollar = #{ourgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalDollar != null" >
+        professional_dollar = #{professionalDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="purgentDollar != null" >
+        purgent_dollar = #{purgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDollar != null" >
+        publish_dollar = #{publishDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="puburgentDollar != null" >
+        puburgent_dollar = #{puburgentDollar,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=CHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=BIGINT},
+      </if>
+      <if test="createOperator != null" >
+        create_operator = #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperatorId != null" >
+        create_operator_id = #{createOperatorId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where duad_id = #{duadId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.common.dao.mapper.bo.SysDuad" >
+    update sys_duad
+    set language = #{language,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=CHAR},
+      source_code = #{sourceCode,jdbcType=VARCHAR},
+      source_cn = #{sourceCn,jdbcType=VARCHAR},
+      source_en = #{sourceEn,jdbcType=VARCHAR},
+      target_code = #{targetCode,jdbcType=VARCHAR},
+      target_cn = #{targetCn,jdbcType=VARCHAR},
+      target_en = #{targetEn,jdbcType=VARCHAR},
+      ordinary = #{ordinary,jdbcType=VARCHAR},
+      ordinary_urgent = #{ordinaryUrgent,jdbcType=VARCHAR},
+      professional = #{professional,jdbcType=VARCHAR},
+      professional_urgent = #{professionalUrgent,jdbcType=VARCHAR},
+      publish = #{publish,jdbcType=VARCHAR},
+      publish_urgent = #{publishUrgent,jdbcType=VARCHAR},
+      ordinary_dollar = #{ordinaryDollar,jdbcType=VARCHAR},
+      ourgent_dollar = #{ourgentDollar,jdbcType=VARCHAR},
+      professional_dollar = #{professionalDollar,jdbcType=VARCHAR},
+      purgent_dollar = #{purgentDollar,jdbcType=VARCHAR},
+      publish_dollar = #{publishDollar,jdbcType=VARCHAR},
+      puburgent_dollar = #{puburgentDollar,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=VARCHAR},
+      state = #{state,jdbcType=CHAR},
+      updatetime = #{updatetime,jdbcType=BIGINT},
+      create_operator = #{createOperator,jdbcType=VARCHAR},
+      create_operator_id = #{createOperatorId,jdbcType=VARCHAR}
+    where duad_id = #{duadId,jdbcType=VARCHAR}
+  </update>
+</mapper>

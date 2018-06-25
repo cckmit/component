@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.GnTDicAreaRegionMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.GnTDicAreaRegion" >
+    <id column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="LEV" property="lev" jdbcType="INTEGER" />
+    <result column="AREA_CODE1" property="areaCode1" jdbcType="VARCHAR" />
+    <result column="AREA_CODE2" property="areaCode2" jdbcType="VARCHAR" />
+    <result column="AREA_CODE3" property="areaCode3" jdbcType="VARCHAR" />
+    <result column="SUP_AREA_CODE" property="supAreaCode" jdbcType="VARCHAR" />
+    <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR" />
+    <result column="PINYIN" property="pinyin" jdbcType="VARCHAR" />
+    <result column="LANG" property="lang" jdbcType="VARCHAR" />
+    <result column="region_code" property="regionCode" jdbcType="VARCHAR" />
+    <result column="AREA_NAME_SHORT" property="areaNameShort" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AREA_CODE, LEV, AREA_CODE1, AREA_CODE2, AREA_CODE3, SUP_AREA_CODE, AREA_NAME, PINYIN, 
+    LANG, region_code, AREA_NAME_SHORT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.GnTDicAreaRegionCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from gn_t_dic_area_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from gn_t_dic_area_region
+    where AREA_CODE = #{areaCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from gn_t_dic_area_region
+    where AREA_CODE = #{areaCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.GnTDicAreaRegionCriteria" >
+    delete from gn_t_dic_area_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.GnTDicAreaRegion" >
+    insert into gn_t_dic_area_region (AREA_CODE, LEV, AREA_CODE1, 
+      AREA_CODE2, AREA_CODE3, SUP_AREA_CODE, 
+      AREA_NAME, PINYIN, LANG, 
+      region_code, AREA_NAME_SHORT)
+    values (#{areaCode,jdbcType=VARCHAR}, #{lev,jdbcType=INTEGER}, #{areaCode1,jdbcType=VARCHAR}, 
+      #{areaCode2,jdbcType=VARCHAR}, #{areaCode3,jdbcType=VARCHAR}, #{supAreaCode,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{pinyin,jdbcType=VARCHAR}, #{lang,jdbcType=VARCHAR}, 
+      #{regionCode,jdbcType=VARCHAR}, #{areaNameShort,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.GnTDicAreaRegion" >
+    insert into gn_t_dic_area_region
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="lev != null" >
+        LEV,
+      </if>
+      <if test="areaCode1 != null" >
+        AREA_CODE1,
+      </if>
+      <if test="areaCode2 != null" >
+        AREA_CODE2,
+      </if>
+      <if test="areaCode3 != null" >
+        AREA_CODE3,
+      </if>
+      <if test="supAreaCode != null" >
+        SUP_AREA_CODE,
+      </if>
+      <if test="areaName != null" >
+        AREA_NAME,
+      </if>
+      <if test="pinyin != null" >
+        PINYIN,
+      </if>
+      <if test="lang != null" >
+        LANG,
+      </if>
+      <if test="regionCode != null" >
+        region_code,
+      </if>
+      <if test="areaNameShort != null" >
+        AREA_NAME_SHORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lev != null" >
+        #{lev,jdbcType=INTEGER},
+      </if>
+      <if test="areaCode1 != null" >
+        #{areaCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode2 != null" >
+        #{areaCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode3 != null" >
+        #{areaCode3,jdbcType=VARCHAR},
+      </if>
+      <if test="supAreaCode != null" >
+        #{supAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null" >
+        #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null" >
+        #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCode != null" >
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNameShort != null" >
+        #{areaNameShort,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.GnTDicAreaRegionCriteria" resultType="java.lang.Integer" >
+    select count(*) from gn_t_dic_area_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gn_t_dic_area_region
+    <set >
+      <if test="record.areaCode != null" >
+        AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lev != null" >
+        LEV = #{record.lev,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaCode1 != null" >
+        AREA_CODE1 = #{record.areaCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaCode2 != null" >
+        AREA_CODE2 = #{record.areaCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaCode3 != null" >
+        AREA_CODE3 = #{record.areaCode3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supAreaCode != null" >
+        SUP_AREA_CODE = #{record.supAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaName != null" >
+        AREA_NAME = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pinyin != null" >
+        PINYIN = #{record.pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lang != null" >
+        LANG = #{record.lang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionCode != null" >
+        region_code = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaNameShort != null" >
+        AREA_NAME_SHORT = #{record.areaNameShort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gn_t_dic_area_region
+    set AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      LEV = #{record.lev,jdbcType=INTEGER},
+      AREA_CODE1 = #{record.areaCode1,jdbcType=VARCHAR},
+      AREA_CODE2 = #{record.areaCode2,jdbcType=VARCHAR},
+      AREA_CODE3 = #{record.areaCode3,jdbcType=VARCHAR},
+      SUP_AREA_CODE = #{record.supAreaCode,jdbcType=VARCHAR},
+      AREA_NAME = #{record.areaName,jdbcType=VARCHAR},
+      PINYIN = #{record.pinyin,jdbcType=VARCHAR},
+      LANG = #{record.lang,jdbcType=VARCHAR},
+      region_code = #{record.regionCode,jdbcType=VARCHAR},
+      AREA_NAME_SHORT = #{record.areaNameShort,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.common.dao.mapper.bo.GnTDicAreaRegion" >
+    update gn_t_dic_area_region
+    <set >
+      <if test="lev != null" >
+        LEV = #{lev,jdbcType=INTEGER},
+      </if>
+      <if test="areaCode1 != null" >
+        AREA_CODE1 = #{areaCode1,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode2 != null" >
+        AREA_CODE2 = #{areaCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode3 != null" >
+        AREA_CODE3 = #{areaCode3,jdbcType=VARCHAR},
+      </if>
+      <if test="supAreaCode != null" >
+        SUP_AREA_CODE = #{supAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        AREA_NAME = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null" >
+        PINYIN = #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null" >
+        LANG = #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="regionCode != null" >
+        region_code = #{regionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNameShort != null" >
+        AREA_NAME_SHORT = #{areaNameShort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AREA_CODE = #{areaCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.common.dao.mapper.bo.GnTDicAreaRegion" >
+    update gn_t_dic_area_region
+    set LEV = #{lev,jdbcType=INTEGER},
+      AREA_CODE1 = #{areaCode1,jdbcType=VARCHAR},
+      AREA_CODE2 = #{areaCode2,jdbcType=VARCHAR},
+      AREA_CODE3 = #{areaCode3,jdbcType=VARCHAR},
+      SUP_AREA_CODE = #{supAreaCode,jdbcType=VARCHAR},
+      AREA_NAME = #{areaName,jdbcType=VARCHAR},
+      PINYIN = #{pinyin,jdbcType=VARCHAR},
+      LANG = #{lang,jdbcType=VARCHAR},
+      region_code = #{regionCode,jdbcType=VARCHAR},
+      AREA_NAME_SHORT = #{areaNameShort,jdbcType=VARCHAR}
+    where AREA_CODE = #{areaCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

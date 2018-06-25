@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.SysPurposeMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.SysPurpose" >
+    <id column="purpose_id" property="purposeId" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+    <result column="purpose_cn" property="purposeCn" jdbcType="VARCHAR" />
+    <result column="purpose_en" property="purposeEn" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="named_flag" property="namedFlag" jdbcType="CHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="BIGINT" />
+    <result column="create_operator" property="createOperator" jdbcType="VARCHAR" />
+    <result column="create_operator_id" property="createOperatorId" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    purpose_id, language, site, purpose_cn, purpose_en, remarks, sort, state, named_flag, 
+    updatetime, create_operator, create_operator_id, flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.SysPurposeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_purpose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_purpose
+    where purpose_id = #{purposeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_purpose
+    where purpose_id = #{purposeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.SysPurposeCriteria" >
+    delete from sys_purpose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.SysPurpose" >
+    insert into sys_purpose (purpose_id, language, site, 
+      purpose_cn, purpose_en, remarks, 
+      sort, state, named_flag, updatetime, 
+      create_operator, create_operator_id, flag
+      )
+    values (#{purposeId,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, 
+      #{purposeCn,jdbcType=VARCHAR}, #{purposeEn,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, #{namedFlag,jdbcType=CHAR}, #{updatetime,jdbcType=BIGINT}, 
+      #{createOperator,jdbcType=VARCHAR}, #{createOperatorId,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.SysPurpose" >
+    insert into sys_purpose
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purposeId != null" >
+        purpose_id,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="site != null" >
+        site,
+      </if>
+      <if test="purposeCn != null" >
+        purpose_cn,
+      </if>
+      <if test="purposeEn != null" >
+        purpose_en,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="namedFlag != null" >
+        named_flag,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="createOperator != null" >
+        create_operator,
+      </if>
+      <if test="createOperatorId != null" >
+        create_operator_id,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purposeId != null" >
+        #{purposeId,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeCn != null" >
+        #{purposeCn,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeEn != null" >
+        #{purposeEn,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="namedFlag != null" >
+        #{namedFlag,jdbcType=CHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=BIGINT},
+      </if>
+      <if test="createOperator != null" >
+        #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperatorId != null" >
+        #{createOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.SysPurposeCriteria" resultType="java.lang.Integer" >
+    select count(*) from sys_purpose
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_purpose
+    <set >
+      <if test="record.purposeId != null" >
+        purpose_id = #{record.purposeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.language != null" >
+        language = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.site != null" >
+        site = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purposeCn != null" >
+        purpose_cn = #{record.purposeCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purposeEn != null" >
+        purpose_en = #{record.purposeEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.namedFlag != null" >
+        named_flag = #{record.namedFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=BIGINT},
+      </if>
+      <if test="record.createOperator != null" >
+        create_operator = #{record.createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createOperatorId != null" >
+        create_operator_id = #{record.createOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_purpose
+    set purpose_id = #{record.purposeId,jdbcType=VARCHAR},
+      language = #{record.language,jdbcType=VARCHAR},
+      site = #{record.site,jdbcType=VARCHAR},
+      purpose_cn = #{record.purposeCn,jdbcType=VARCHAR},
+      purpose_en = #{record.purposeEn,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=CHAR},
+      named_flag = #{record.namedFlag,jdbcType=CHAR},
+      updatetime = #{record.updatetime,jdbcType=BIGINT},
+      create_operator = #{record.createOperator,jdbcType=VARCHAR},
+      create_operator_id = #{record.createOperatorId,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.common.dao.mapper.bo.SysPurpose" >
+    update sys_purpose
+    <set >
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeCn != null" >
+        purpose_cn = #{purposeCn,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeEn != null" >
+        purpose_en = #{purposeEn,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=CHAR},
+      </if>
+      <if test="namedFlag != null" >
+        named_flag = #{namedFlag,jdbcType=CHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=BIGINT},
+      </if>
+      <if test="createOperator != null" >
+        create_operator = #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperatorId != null" >
+        create_operator_id = #{createOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where purpose_id = #{purposeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.common.dao.mapper.bo.SysPurpose" >
+    update sys_purpose
+    set language = #{language,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR},
+      purpose_cn = #{purposeCn,jdbcType=VARCHAR},
+      purpose_en = #{purposeEn,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=VARCHAR},
+      state = #{state,jdbcType=CHAR},
+      named_flag = #{namedFlag,jdbcType=CHAR},
+      updatetime = #{updatetime,jdbcType=BIGINT},
+      create_operator = #{createOperator,jdbcType=VARCHAR},
+      create_operator_id = #{createOperatorId,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR}
+    where purpose_id = #{purposeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

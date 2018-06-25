@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.centra.dst.dao.mapper.interfaces.DstCustDiscountInstanceMapper" >
+  <resultMap id="BaseResultMap" type="com.x.centra.dst.dao.mapper.bo.DstCustDiscountInstance" >
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="INSTANCE_ID" property="instanceId" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_ID" property="discountId" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_CODE" property="discountCode" jdbcType="VARCHAR" />
+    <result column="OWNER_CODE" property="ownerCode" jdbcType="VARCHAR" />
+    <result column="OWNER_INSTANCE_CODE" property="ownerInstanceCode" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_PAY_DATE" property="discountPayDate" jdbcType="TIMESTAMP" />
+    <result column="ACTIVE_STATUS" property="activeStatus" jdbcType="VARCHAR" />
+    <result column="ACTIVE_DATE" property="activeDate" jdbcType="TIMESTAMP" />
+    <result column="EFFECTIVE_DATE" property="effectiveDate" jdbcType="TIMESTAMP" />
+    <result column="EXPIRATION_DATE" property="expirationDate" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="REMIND_INDEX" property="remindIndex" jdbcType="VARCHAR" />
+    <result column="REMIND_STATE" property="remindState" jdbcType="VARCHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_NAME" property="discountName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TENANT_ID, INSTANCE_ID, DISCOUNT_ID, DISCOUNT_CODE, OWNER_CODE, OWNER_INSTANCE_CODE, 
+    CUST_ID, DISCOUNT_PAY_DATE, ACTIVE_STATUS, ACTIVE_DATE, EFFECTIVE_DATE, EXPIRATION_DATE, 
+    STATUS, CREATE_USER_ID, CREATE_DATE, REMARK, REMIND_INDEX, REMIND_STATE, CUST_NAME, 
+    DISCOUNT_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.centra.dst.dao.mapper.bo.DstCustDiscountInstanceCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dst_cust_discount_instance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.x.centra.dst.dao.mapper.bo.DstCustDiscountInstanceCriteria" >
+    delete from dst_cust_discount_instance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.centra.dst.dao.mapper.bo.DstCustDiscountInstance" >
+    insert into dst_cust_discount_instance (TENANT_ID, INSTANCE_ID, DISCOUNT_ID, 
+      DISCOUNT_CODE, OWNER_CODE, OWNER_INSTANCE_CODE, 
+      CUST_ID, DISCOUNT_PAY_DATE, ACTIVE_STATUS, 
+      ACTIVE_DATE, EFFECTIVE_DATE, EXPIRATION_DATE, 
+      STATUS, CREATE_USER_ID, CREATE_DATE, 
+      REMARK, REMIND_INDEX, REMIND_STATE, 
+      CUST_NAME, DISCOUNT_NAME)
+    values (#{tenantId,jdbcType=VARCHAR}, #{instanceId,jdbcType=VARCHAR}, #{discountId,jdbcType=VARCHAR}, 
+      #{discountCode,jdbcType=VARCHAR}, #{ownerCode,jdbcType=VARCHAR}, #{ownerInstanceCode,jdbcType=VARCHAR}, 
+      #{custId,jdbcType=VARCHAR}, #{discountPayDate,jdbcType=TIMESTAMP}, #{activeStatus,jdbcType=VARCHAR}, 
+      #{activeDate,jdbcType=TIMESTAMP}, #{effectiveDate,jdbcType=TIMESTAMP}, #{expirationDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{remindIndex,jdbcType=VARCHAR}, #{remindState,jdbcType=VARCHAR}, 
+      #{custName,jdbcType=VARCHAR}, #{discountName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.centra.dst.dao.mapper.bo.DstCustDiscountInstance" >
+    insert into dst_cust_discount_instance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="instanceId != null" >
+        INSTANCE_ID,
+      </if>
+      <if test="discountId != null" >
+        DISCOUNT_ID,
+      </if>
+      <if test="discountCode != null" >
+        DISCOUNT_CODE,
+      </if>
+      <if test="ownerCode != null" >
+        OWNER_CODE,
+      </if>
+      <if test="ownerInstanceCode != null" >
+        OWNER_INSTANCE_CODE,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="discountPayDate != null" >
+        DISCOUNT_PAY_DATE,
+      </if>
+      <if test="activeStatus != null" >
+        ACTIVE_STATUS,
+      </if>
+      <if test="activeDate != null" >
+        ACTIVE_DATE,
+      </if>
+      <if test="effectiveDate != null" >
+        EFFECTIVE_DATE,
+      </if>
+      <if test="expirationDate != null" >
+        EXPIRATION_DATE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="remindIndex != null" >
+        REMIND_INDEX,
+      </if>
+      <if test="remindState != null" >
+        REMIND_STATE,
+      </if>
+      <if test="custName != null" >
+        CUST_NAME,
+      </if>
+      <if test="discountName != null" >
+        DISCOUNT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="instanceId != null" >
+        #{instanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountId != null" >
+        #{discountId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountCode != null" >
+        #{discountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerCode != null" >
+        #{ownerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerInstanceCode != null" >
+        #{ownerInstanceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountPayDate != null" >
+        #{discountPayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeStatus != null" >
+        #{activeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="activeDate != null" >
+        #{activeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectiveDate != null" >
+        #{effectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expirationDate != null" >
+        #{expirationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="remindIndex != null" >
+        #{remindIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="remindState != null" >
+        #{remindState,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="discountName != null" >
+        #{discountName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.centra.dst.dao.mapper.bo.DstCustDiscountInstanceCriteria" resultType="java.lang.Integer" >
+    select count(*) from dst_cust_discount_instance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dst_cust_discount_instance
+    <set >
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instanceId != null" >
+        INSTANCE_ID = #{record.instanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountId != null" >
+        DISCOUNT_ID = #{record.discountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountCode != null" >
+        DISCOUNT_CODE = #{record.discountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerCode != null" >
+        OWNER_CODE = #{record.ownerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerInstanceCode != null" >
+        OWNER_INSTANCE_CODE = #{record.ownerInstanceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountPayDate != null" >
+        DISCOUNT_PAY_DATE = #{record.discountPayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activeStatus != null" >
+        ACTIVE_STATUS = #{record.activeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activeDate != null" >
+        ACTIVE_DATE = #{record.activeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.effectiveDate != null" >
+        EFFECTIVE_DATE = #{record.effectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expirationDate != null" >
+        EXPIRATION_DATE = #{record.expirationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserId != null" >
+        CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remindIndex != null" >
+        REMIND_INDEX = #{record.remindIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remindState != null" >
+        REMIND_STATE = #{record.remindState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null" >
+        CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountName != null" >
+        DISCOUNT_NAME = #{record.discountName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dst_cust_discount_instance
+    set TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      INSTANCE_ID = #{record.instanceId,jdbcType=VARCHAR},
+      DISCOUNT_ID = #{record.discountId,jdbcType=VARCHAR},
+      DISCOUNT_CODE = #{record.discountCode,jdbcType=VARCHAR},
+      OWNER_CODE = #{record.ownerCode,jdbcType=VARCHAR},
+      OWNER_INSTANCE_CODE = #{record.ownerInstanceCode,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      DISCOUNT_PAY_DATE = #{record.discountPayDate,jdbcType=TIMESTAMP},
+      ACTIVE_STATUS = #{record.activeStatus,jdbcType=VARCHAR},
+      ACTIVE_DATE = #{record.activeDate,jdbcType=TIMESTAMP},
+      EFFECTIVE_DATE = #{record.effectiveDate,jdbcType=TIMESTAMP},
+      EXPIRATION_DATE = #{record.expirationDate,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      REMIND_INDEX = #{record.remindIndex,jdbcType=VARCHAR},
+      REMIND_STATE = #{record.remindState,jdbcType=VARCHAR},
+      CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      DISCOUNT_NAME = #{record.discountName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

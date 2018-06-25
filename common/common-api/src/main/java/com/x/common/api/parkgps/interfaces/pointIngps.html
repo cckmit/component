@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>折线、多边形、圆</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <script src="http://webapi.amap.com/maps?v=1.4.4&key=您申请的key值"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    var map = new AMap.Map('container', {
+        resizeEnable: true,
+        center: [118.791003, 32.062854],//初始地图中心，此处最好与圆心坐标相同
+        zoom: 15
+    });
+	//开始标记坐标点
+		new AMap.Marker({ map: map, position: [118.793495	,32.062745]});
+		new AMap.Marker({ map: map, position: [118.793643	,32.062103]});
+		new AMap.Marker({ map: map, position: [118.793613	,32.059717]});
+		new AMap.Marker({ map: map, position: [118.791618	,32.062876]});
+		new AMap.Marker({ map: map, position: [118.792719	,32.062949]});
+		new AMap.Marker({ map: map, position: [118.791003	,32.062854]});
+		new AMap.Marker({ map: map, position: [118.792136	,32.062924]});
+		new AMap.Marker({ map: map, position: [118.792688	,32.058497]});
+		new AMap.Marker({ map: map, position: [118.791267	,32.058506]});
+		new AMap.Marker({ map: map, position: [118.790044	,32.058444]});
+		new AMap.Marker({ map: map, position: [118.792392	,32.060403]});
+		new AMap.Marker({ map: map, position: [118.792093	,32.060227]});
+		new AMap.Marker({ map: map, position: [118.795194	,32.060335]});
+		new AMap.Marker({ map: map, position: [118.794337	,32.058507]});
+		new AMap.Marker({ map: map, position: [118.795397	,32.060065]});
+		new AMap.Marker({ map: map, position: [118.794623	,32.062921]});
+		new AMap.Marker({ map: map, position: [118.789006	,32.060601]});
+		new AMap.Marker({ map: map, position: [118.788754	,32.061737]});
+		new AMap.Marker({ map: map, position: [118.788485	,32.062933]});
+		new AMap.Marker({ map: map, position: [118.788266	,32.063681]});
+		new AMap.Marker({ map: map, position: [118.786367	,32.059819]});
+		new AMap.Marker({ map: map, position: [118.789507	,32.058462]});
+		new AMap.Marker({ map: map, position: [118.793419	,32.067007]});
+		new AMap.Marker({ map: map, position: [118.791643	,32.066367]});
+		new AMap.Marker({ map: map, position: [118.791661	,32.066360]});
+		new AMap.Marker({ map: map, position: [118.792136	,32.062924]});
+		new AMap.Marker({ map: map, position: [118.793643	,32.062103]});	
+		//结束标记坐标点
+
+    var circle = new AMap.Circle({
+        center: new AMap.LngLat("118.791003", "32.062854"),// 圆心位置，将CTR_COMMON_PARK_003入参中的经纬度填入到此处
+        radius: 500, //半径,将CTR_COMMON_PARK_003入参中的半径填写到此处，此处单位为米，接口单位为千米
+        strokeColor: "#F33", //线颜色
+        strokeOpacity: 1, //线透明度
+        strokeWeight: 3, //线粗细度
+        fillColor: "#ee2200", //填充颜色
+        fillOpacity: 0.35//填充透明度
+    });
+    circle.setMap(map);
+</script>
+</body>
+</html>

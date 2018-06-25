@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.centra.dst.dao.mapper.interfaces.DstDiscountClassMapper" >
+  <resultMap id="BaseResultMap" type="com.x.centra.dst.dao.mapper.bo.DstDiscountClass" >
+    <id column="CLASS_ID" property="classId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
+    <result column="CLASS_CODE" property="classCode" jdbcType="VARCHAR" />
+    <result column="CLASS_INSTRUCTIONS" property="classInstructions" jdbcType="VARCHAR" />
+    <result column="CLASS_AREA_INSTRUCTIONS" property="classAreaInstructions" jdbcType="VARCHAR" />
+    <result column="CLASS_USE_INSTRUCTIONS" property="classUseInstructions" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CLASS_ID, TENANT_ID, CLASS_NAME, CLASS_CODE, CLASS_INSTRUCTIONS, CLASS_AREA_INSTRUCTIONS, 
+    CLASS_USE_INSTRUCTIONS, STATUS, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountClassCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dst_discount_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dst_discount_class
+    where CLASS_ID = #{classId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dst_discount_class
+    where CLASS_ID = #{classId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountClassCriteria" >
+    delete from dst_discount_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountClass" >
+    insert into dst_discount_class (CLASS_ID, TENANT_ID, CLASS_NAME, 
+      CLASS_CODE, CLASS_INSTRUCTIONS, CLASS_AREA_INSTRUCTIONS, 
+      CLASS_USE_INSTRUCTIONS, STATUS, REMARK
+      )
+    values (#{classId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, 
+      #{classCode,jdbcType=VARCHAR}, #{classInstructions,jdbcType=VARCHAR}, #{classAreaInstructions,jdbcType=VARCHAR}, 
+      #{classUseInstructions,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountClass" >
+    insert into dst_discount_class
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classId != null" >
+        CLASS_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="className != null" >
+        CLASS_NAME,
+      </if>
+      <if test="classCode != null" >
+        CLASS_CODE,
+      </if>
+      <if test="classInstructions != null" >
+        CLASS_INSTRUCTIONS,
+      </if>
+      <if test="classAreaInstructions != null" >
+        CLASS_AREA_INSTRUCTIONS,
+      </if>
+      <if test="classUseInstructions != null" >
+        CLASS_USE_INSTRUCTIONS,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classId != null" >
+        #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classCode != null" >
+        #{classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="classInstructions != null" >
+        #{classInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="classAreaInstructions != null" >
+        #{classAreaInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="classUseInstructions != null" >
+        #{classUseInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountClassCriteria" resultType="java.lang.Integer" >
+    select count(*) from dst_discount_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dst_discount_class
+    <set >
+      <if test="record.classId != null" >
+        CLASS_ID = #{record.classId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.className != null" >
+        CLASS_NAME = #{record.className,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classCode != null" >
+        CLASS_CODE = #{record.classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classInstructions != null" >
+        CLASS_INSTRUCTIONS = #{record.classInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classAreaInstructions != null" >
+        CLASS_AREA_INSTRUCTIONS = #{record.classAreaInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classUseInstructions != null" >
+        CLASS_USE_INSTRUCTIONS = #{record.classUseInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dst_discount_class
+    set CLASS_ID = #{record.classId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      CLASS_NAME = #{record.className,jdbcType=VARCHAR},
+      CLASS_CODE = #{record.classCode,jdbcType=VARCHAR},
+      CLASS_INSTRUCTIONS = #{record.classInstructions,jdbcType=VARCHAR},
+      CLASS_AREA_INSTRUCTIONS = #{record.classAreaInstructions,jdbcType=VARCHAR},
+      CLASS_USE_INSTRUCTIONS = #{record.classUseInstructions,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountClass" >
+    update dst_discount_class
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        CLASS_NAME = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classCode != null" >
+        CLASS_CODE = #{classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="classInstructions != null" >
+        CLASS_INSTRUCTIONS = #{classInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="classAreaInstructions != null" >
+        CLASS_AREA_INSTRUCTIONS = #{classAreaInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="classUseInstructions != null" >
+        CLASS_USE_INSTRUCTIONS = #{classUseInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CLASS_ID = #{classId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountClass" >
+    update dst_discount_class
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      CLASS_NAME = #{className,jdbcType=VARCHAR},
+      CLASS_CODE = #{classCode,jdbcType=VARCHAR},
+      CLASS_INSTRUCTIONS = #{classInstructions,jdbcType=VARCHAR},
+      CLASS_AREA_INSTRUCTIONS = #{classAreaInstructions,jdbcType=VARCHAR},
+      CLASS_USE_INSTRUCTIONS = #{classUseInstructions,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where CLASS_ID = #{classId,jdbcType=VARCHAR}
+  </update>
+</mapper>

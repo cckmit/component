@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.centra.dst.dao.mapper.interfaces.DstDiscountInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.x.centra.dst.dao.mapper.bo.DstDiscountInfo" >
+    <id column="DISCOUNT_ID" property="discountId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_NAME" property="discountName" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_CODE" property="discountCode" jdbcType="VARCHAR" />
+    <result column="CLASS_CODE" property="classCode" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_INSTRUCTIONS" property="discountInstructions" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_TYPE" property="discountType" jdbcType="VARCHAR" />
+    <result column="EFFECTIVE_TIME" property="effectiveTime" jdbcType="VARCHAR" />
+    <result column="EFFECTIVE_UNIT" property="effectiveUnit" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="VERIFY_STATE" property="verifyState" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DISCOUNT_ID, TENANT_ID, DISCOUNT_NAME, DISCOUNT_CODE, CLASS_CODE, DISCOUNT_INSTRUCTIONS, 
+    DISCOUNT_TYPE, EFFECTIVE_TIME, EFFECTIVE_UNIT, STATUS, VERIFY_STATE, CREATE_USER_ID, 
+    CREATE_DATE, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dst_discount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dst_discount_info
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dst_discount_info
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountInfoCriteria" >
+    delete from dst_discount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountInfo" >
+    insert into dst_discount_info (DISCOUNT_ID, TENANT_ID, DISCOUNT_NAME, 
+      DISCOUNT_CODE, CLASS_CODE, DISCOUNT_INSTRUCTIONS, 
+      DISCOUNT_TYPE, EFFECTIVE_TIME, EFFECTIVE_UNIT, 
+      STATUS, VERIFY_STATE, CREATE_USER_ID, 
+      CREATE_DATE, REMARK)
+    values (#{discountId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{discountName,jdbcType=VARCHAR}, 
+      #{discountCode,jdbcType=VARCHAR}, #{classCode,jdbcType=VARCHAR}, #{discountInstructions,jdbcType=VARCHAR}, 
+      #{discountType,jdbcType=VARCHAR}, #{effectiveTime,jdbcType=VARCHAR}, #{effectiveUnit,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{verifyState,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountInfo" >
+    insert into dst_discount_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="discountId != null" >
+        DISCOUNT_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="discountName != null" >
+        DISCOUNT_NAME,
+      </if>
+      <if test="discountCode != null" >
+        DISCOUNT_CODE,
+      </if>
+      <if test="classCode != null" >
+        CLASS_CODE,
+      </if>
+      <if test="discountInstructions != null" >
+        DISCOUNT_INSTRUCTIONS,
+      </if>
+      <if test="discountType != null" >
+        DISCOUNT_TYPE,
+      </if>
+      <if test="effectiveTime != null" >
+        EFFECTIVE_TIME,
+      </if>
+      <if test="effectiveUnit != null" >
+        EFFECTIVE_UNIT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="verifyState != null" >
+        VERIFY_STATE,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="discountId != null" >
+        #{discountId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountName != null" >
+        #{discountName,jdbcType=VARCHAR},
+      </if>
+      <if test="discountCode != null" >
+        #{discountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="classCode != null" >
+        #{classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="discountInstructions != null" >
+        #{discountInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="discountType != null" >
+        #{discountType,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveTime != null" >
+        #{effectiveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveUnit != null" >
+        #{effectiveUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyState != null" >
+        #{verifyState,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from dst_discount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dst_discount_info
+    <set >
+      <if test="record.discountId != null" >
+        DISCOUNT_ID = #{record.discountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountName != null" >
+        DISCOUNT_NAME = #{record.discountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountCode != null" >
+        DISCOUNT_CODE = #{record.discountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classCode != null" >
+        CLASS_CODE = #{record.classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountInstructions != null" >
+        DISCOUNT_INSTRUCTIONS = #{record.discountInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountType != null" >
+        DISCOUNT_TYPE = #{record.discountType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectiveTime != null" >
+        EFFECTIVE_TIME = #{record.effectiveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectiveUnit != null" >
+        EFFECTIVE_UNIT = #{record.effectiveUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verifyState != null" >
+        VERIFY_STATE = #{record.verifyState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserId != null" >
+        CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dst_discount_info
+    set DISCOUNT_ID = #{record.discountId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      DISCOUNT_NAME = #{record.discountName,jdbcType=VARCHAR},
+      DISCOUNT_CODE = #{record.discountCode,jdbcType=VARCHAR},
+      CLASS_CODE = #{record.classCode,jdbcType=VARCHAR},
+      DISCOUNT_INSTRUCTIONS = #{record.discountInstructions,jdbcType=VARCHAR},
+      DISCOUNT_TYPE = #{record.discountType,jdbcType=VARCHAR},
+      EFFECTIVE_TIME = #{record.effectiveTime,jdbcType=VARCHAR},
+      EFFECTIVE_UNIT = #{record.effectiveUnit,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      VERIFY_STATE = #{record.verifyState,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountInfo" >
+    update dst_discount_info
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountName != null" >
+        DISCOUNT_NAME = #{discountName,jdbcType=VARCHAR},
+      </if>
+      <if test="discountCode != null" >
+        DISCOUNT_CODE = #{discountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="classCode != null" >
+        CLASS_CODE = #{classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="discountInstructions != null" >
+        DISCOUNT_INSTRUCTIONS = #{discountInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="discountType != null" >
+        DISCOUNT_TYPE = #{discountType,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveTime != null" >
+        EFFECTIVE_TIME = #{effectiveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveUnit != null" >
+        EFFECTIVE_UNIT = #{effectiveUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyState != null" >
+        VERIFY_STATE = #{verifyState,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.centra.dst.dao.mapper.bo.DstDiscountInfo" >
+    update dst_discount_info
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      DISCOUNT_NAME = #{discountName,jdbcType=VARCHAR},
+      DISCOUNT_CODE = #{discountCode,jdbcType=VARCHAR},
+      CLASS_CODE = #{classCode,jdbcType=VARCHAR},
+      DISCOUNT_INSTRUCTIONS = #{discountInstructions,jdbcType=VARCHAR},
+      DISCOUNT_TYPE = #{discountType,jdbcType=VARCHAR},
+      EFFECTIVE_TIME = #{effectiveTime,jdbcType=VARCHAR},
+      EFFECTIVE_UNIT = #{effectiveUnit,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      VERIFY_STATE = #{verifyState,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </update>
+</mapper>

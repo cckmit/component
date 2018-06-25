@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.x.common.dao.mapper.interfaces.ParkGpsMapper">
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.ParkGps">
+    <result column="WG_ID" jdbcType="VARCHAR" property="wgId" />
+    <result column="WG_NAME" jdbcType="VARCHAR" property="wgName" />
+    <result column="PARK_ID_INNER" jdbcType="VARCHAR" property="parkIdInner" />
+    <result column="PARK_ID_OUTER" jdbcType="VARCHAR" property="parkIdOuter" />
+    <result column="PARK_NAME" jdbcType="VARCHAR" property="parkName" />
+    <result column="WORK_TIMES" jdbcType="VARCHAR" property="workTimes" />
+    <result column="MAP_LNG" jdbcType="DECIMAL" property="mapLng" />
+    <result column="MAP_LAT" jdbcType="DECIMAL" property="mapLat" />
+    <result column="FEE_STANDARD_ID" jdbcType="VARCHAR" property="feeStandardId" />
+    <result column="PUBLIC_DEPICT" jdbcType="VARCHAR" property="publicDepict" />
+    <result column="AREA_CODE" jdbcType="VARCHAR" property="areaCode" />
+    <result column="PARK_TYPE" jdbcType="CHAR" property="parkType" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="CITY_NAME" jdbcType="VARCHAR" property="cityName" />
+    <result column="AREA_NAME" jdbcType="VARCHAR" property="areaName" />
+    <result column="park_desc" jdbcType="VARCHAR" property="parkDesc" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_mobile" jdbcType="VARCHAR" property="userMobile" />
+    <result column="place_tem" jdbcType="INTEGER" property="placeTem" />
+    <result column="place_count" jdbcType="INTEGER" property="placeCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    WG_ID, WG_NAME, PARK_ID_INNER, PARK_ID_OUTER, PARK_NAME, WORK_TIMES, MAP_LNG, MAP_LAT, 
+    FEE_STANDARD_ID, PUBLIC_DEPICT, AREA_CODE, PARK_TYPE, CITY_CODE, CITY_NAME, AREA_NAME, 
+    park_desc, user_name, user_mobile, place_tem, place_count, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.x.common.dao.mapper.bo.ParkGpsCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from park_gps
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.ParkGpsCriteria">
+    delete from park_gps
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.ParkGps">
+    insert into park_gps (WG_ID, WG_NAME, PARK_ID_INNER, 
+      PARK_ID_OUTER, PARK_NAME, WORK_TIMES, 
+      MAP_LNG, MAP_LAT, FEE_STANDARD_ID, 
+      PUBLIC_DEPICT, AREA_CODE, PARK_TYPE, 
+      CITY_CODE, CITY_NAME, AREA_NAME, 
+      park_desc, user_name, user_mobile, 
+      place_tem, place_count, create_time, 
+      update_time)
+    values (#{wgId,jdbcType=VARCHAR}, #{wgName,jdbcType=VARCHAR}, #{parkIdInner,jdbcType=VARCHAR}, 
+      #{parkIdOuter,jdbcType=VARCHAR}, #{parkName,jdbcType=VARCHAR}, #{workTimes,jdbcType=VARCHAR}, 
+      #{mapLng,jdbcType=DECIMAL}, #{mapLat,jdbcType=DECIMAL}, #{feeStandardId,jdbcType=VARCHAR}, 
+      #{publicDepict,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{parkType,jdbcType=CHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
+      #{parkDesc,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, 
+      #{placeTem,jdbcType=INTEGER}, #{placeCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.ParkGps">
+    insert into park_gps
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wgId != null">
+        WG_ID,
+      </if>
+      <if test="wgName != null">
+        WG_NAME,
+      </if>
+      <if test="parkIdInner != null">
+        PARK_ID_INNER,
+      </if>
+      <if test="parkIdOuter != null">
+        PARK_ID_OUTER,
+      </if>
+      <if test="parkName != null">
+        PARK_NAME,
+      </if>
+      <if test="workTimes != null">
+        WORK_TIMES,
+      </if>
+      <if test="mapLng != null">
+        MAP_LNG,
+      </if>
+      <if test="mapLat != null">
+        MAP_LAT,
+      </if>
+      <if test="feeStandardId != null">
+        FEE_STANDARD_ID,
+      </if>
+      <if test="publicDepict != null">
+        PUBLIC_DEPICT,
+      </if>
+      <if test="areaCode != null">
+        AREA_CODE,
+      </if>
+      <if test="parkType != null">
+        PARK_TYPE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="cityName != null">
+        CITY_NAME,
+      </if>
+      <if test="areaName != null">
+        AREA_NAME,
+      </if>
+      <if test="parkDesc != null">
+        park_desc,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userMobile != null">
+        user_mobile,
+      </if>
+      <if test="placeTem != null">
+        place_tem,
+      </if>
+      <if test="placeCount != null">
+        place_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wgId != null">
+        #{wgId,jdbcType=VARCHAR},
+      </if>
+      <if test="wgName != null">
+        #{wgName,jdbcType=VARCHAR},
+      </if>
+      <if test="parkIdInner != null">
+        #{parkIdInner,jdbcType=VARCHAR},
+      </if>
+      <if test="parkIdOuter != null">
+        #{parkIdOuter,jdbcType=VARCHAR},
+      </if>
+      <if test="parkName != null">
+        #{parkName,jdbcType=VARCHAR},
+      </if>
+      <if test="workTimes != null">
+        #{workTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="mapLng != null">
+        #{mapLng,jdbcType=DECIMAL},
+      </if>
+      <if test="mapLat != null">
+        #{mapLat,jdbcType=DECIMAL},
+      </if>
+      <if test="feeStandardId != null">
+        #{feeStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="publicDepict != null">
+        #{publicDepict,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parkType != null">
+        #{parkType,jdbcType=CHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="parkDesc != null">
+        #{parkDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="placeTem != null">
+        #{placeTem,jdbcType=INTEGER},
+      </if>
+      <if test="placeCount != null">
+        #{placeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.ParkGpsCriteria" resultType="java.lang.Integer">
+    select count(*) from park_gps
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update park_gps
+    <set>
+      <if test="record.wgId != null">
+        WG_ID = #{record.wgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wgName != null">
+        WG_NAME = #{record.wgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkIdInner != null">
+        PARK_ID_INNER = #{record.parkIdInner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkIdOuter != null">
+        PARK_ID_OUTER = #{record.parkIdOuter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkName != null">
+        PARK_NAME = #{record.parkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workTimes != null">
+        WORK_TIMES = #{record.workTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mapLng != null">
+        MAP_LNG = #{record.mapLng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mapLat != null">
+        MAP_LAT = #{record.mapLat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.feeStandardId != null">
+        FEE_STANDARD_ID = #{record.feeStandardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicDepict != null">
+        PUBLIC_DEPICT = #{record.publicDepict,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaCode != null">
+        AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkType != null">
+        PARK_TYPE = #{record.parkType,jdbcType=CHAR},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityName != null">
+        CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaName != null">
+        AREA_NAME = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkDesc != null">
+        park_desc = #{record.parkDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMobile != null">
+        user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.placeTem != null">
+        place_tem = #{record.placeTem,jdbcType=INTEGER},
+      </if>
+      <if test="record.placeCount != null">
+        place_count = #{record.placeCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update park_gps
+    set WG_ID = #{record.wgId,jdbcType=VARCHAR},
+      WG_NAME = #{record.wgName,jdbcType=VARCHAR},
+      PARK_ID_INNER = #{record.parkIdInner,jdbcType=VARCHAR},
+      PARK_ID_OUTER = #{record.parkIdOuter,jdbcType=VARCHAR},
+      PARK_NAME = #{record.parkName,jdbcType=VARCHAR},
+      WORK_TIMES = #{record.workTimes,jdbcType=VARCHAR},
+      MAP_LNG = #{record.mapLng,jdbcType=DECIMAL},
+      MAP_LAT = #{record.mapLat,jdbcType=DECIMAL},
+      FEE_STANDARD_ID = #{record.feeStandardId,jdbcType=VARCHAR},
+      PUBLIC_DEPICT = #{record.publicDepict,jdbcType=VARCHAR},
+      AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      PARK_TYPE = #{record.parkType,jdbcType=CHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
+      AREA_NAME = #{record.areaName,jdbcType=VARCHAR},
+      park_desc = #{record.parkDesc,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+      place_tem = #{record.placeTem,jdbcType=INTEGER},
+      place_count = #{record.placeCount,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,45 @@
+configurations.all { 
+	    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+ 	}
+
+dependencies {
+    compile project(":common-api")
+    compile 'org.mybatis:mybatis:3.2.8'
+    compile 'org.mybatis:mybatis-spring:1.2.2'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
+    compile "org.springframework:spring-context:4.1.7.RELEASE"
+    compile 'org.dom4j:dom4j:2.0.0'
+    compile (group:'com.dangdang',name:'elastic-job-lite-lifecycle',version:'2.0.0'){
+        exclude(module: 'com.dangdang')
+        exclude(module: 'elastic-job-lite-core')
+    }
+    
+    compile 'com.x:sdk:1.0-SNAPSHOT'
+
+    //compile 'com.x.centra:centra-sdk:1.0-SNAPSHOT'
+    //订单详情查询
+    //compile 'com.x.order:orderdetails:1.0-SNAPSHOT'
+	//订单发票状态修改
+	//compile 'com.x.order:orderinvoice:1.0-SNAPSHOT'
+	//订单列表查询
+	//compile 'com.x.order:orderquery:1.0-SNAPSHOT'
+	
+	//用户中心
+	//compile 'com.x.user:userservice:2.1-SNAPSHOT'
+	
+	//compile 'com.x.ucenter:members:1.1.1-SNAPSHOT'
+	//compile 'com.x.sms:focusSmsSDK:1.1'
+ 	compile(group: 'com.alibaba', name: 'druid', version:'1.0.18') {
+	exclude(module: 'jconsole')
+	exclude(module: 'tools')
+    }
+
+    testCompile(
+            "org.springframework:spring-test:3.2.13.RELEASE",
+            "junit:junit:4.11"
+    )
+
+}

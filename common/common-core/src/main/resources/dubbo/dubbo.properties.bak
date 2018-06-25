@@ -1,0 +1,12 @@
+###########DEV Product Params start#######################
+dubbo.appname=common
+dubbo.registry.protocol=zookeeper
+dubbo.registry.address=192.168.0.16:39181
+#dubbo.registry.address=127.0.0.1:2181
+dubbo.registry.file=../dubbo_registry_cache/common-dubbo-registry.cache
+dubbo.protocol=rest
+general.common.dubbo.port=10881
+dubbo.provider.timeout=200000
+dubbo.protocol.server=tomcat
+dubbo.protocol.contextpath=common
+###########DEV Product Params end########################

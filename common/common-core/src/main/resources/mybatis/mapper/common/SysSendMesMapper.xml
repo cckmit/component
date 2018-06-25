@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.SysSendMesMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.SysSendMes" >
+    <id column="MES_ID" property="mesId" jdbcType="VARCHAR" />
+    <result column="MES_NAME" property="mesName" jdbcType="VARCHAR" />
+    <result column="MODEL_NAME" property="modelName" jdbcType="VARCHAR" />
+    <result column="LIST_NAME" property="listName" jdbcType="VARCHAR" />
+    <result column="CREAT_PEOPLE" property="creatPeople" jdbcType="VARCHAR" />
+    <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.x.common.dao.mapper.bo.SysSendMes" extends="BaseResultMap" >
+    <result column="MODEL_CONTEN" property="modelConten" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MES_ID, MES_NAME, MODEL_NAME, LIST_NAME, CREAT_PEOPLE, CREAT_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    MODEL_CONTEN
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.x.common.dao.mapper.bo.SysSendMesCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_send_mes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.SysSendMesCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_send_mes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_send_mes
+    where MES_ID = #{mesId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_send_mes
+    where MES_ID = #{mesId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.SysSendMesCriteria" >
+    delete from sys_send_mes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.SysSendMes" >
+    insert into sys_send_mes (MES_ID, MES_NAME, MODEL_NAME, 
+      LIST_NAME, CREAT_PEOPLE, CREAT_TIME, 
+      MODEL_CONTEN)
+    values (#{mesId,jdbcType=VARCHAR}, #{mesName,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
+      #{listName,jdbcType=VARCHAR}, #{creatPeople,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{modelConten,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.SysSendMes" >
+    insert into sys_send_mes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mesId != null" >
+        MES_ID,
+      </if>
+      <if test="mesName != null" >
+        MES_NAME,
+      </if>
+      <if test="modelName != null" >
+        MODEL_NAME,
+      </if>
+      <if test="listName != null" >
+        LIST_NAME,
+      </if>
+      <if test="creatPeople != null" >
+        CREAT_PEOPLE,
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME,
+      </if>
+      <if test="modelConten != null" >
+        MODEL_CONTEN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mesId != null" >
+        #{mesId,jdbcType=VARCHAR},
+      </if>
+      <if test="mesName != null" >
+        #{mesName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="listName != null" >
+        #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatPeople != null" >
+        #{creatPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modelConten != null" >
+        #{modelConten,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.SysSendMesCriteria" resultType="java.lang.Integer" >
+    select count(*) from sys_send_mes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_send_mes
+    <set >
+      <if test="record.mesId != null" >
+        MES_ID = #{record.mesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mesName != null" >
+        MES_NAME = #{record.mesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelName != null" >
+        MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.listName != null" >
+        LIST_NAME = #{record.listName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatPeople != null" >
+        CREAT_PEOPLE = #{record.creatPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatTime != null" >
+        CREAT_TIME = #{record.creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modelConten != null" >
+        MODEL_CONTEN = #{record.modelConten,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_send_mes
+    set MES_ID = #{record.mesId,jdbcType=VARCHAR},
+      MES_NAME = #{record.mesName,jdbcType=VARCHAR},
+      MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      LIST_NAME = #{record.listName,jdbcType=VARCHAR},
+      CREAT_PEOPLE = #{record.creatPeople,jdbcType=VARCHAR},
+      CREAT_TIME = #{record.creatTime,jdbcType=TIMESTAMP},
+      MODEL_CONTEN = #{record.modelConten,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_send_mes
+    set MES_ID = #{record.mesId,jdbcType=VARCHAR},
+      MES_NAME = #{record.mesName,jdbcType=VARCHAR},
+      MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      LIST_NAME = #{record.listName,jdbcType=VARCHAR},
+      CREAT_PEOPLE = #{record.creatPeople,jdbcType=VARCHAR},
+      CREAT_TIME = #{record.creatTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.x.common.dao.mapper.bo.SysSendMes" >
+    update sys_send_mes
+    <set >
+      <if test="mesName != null" >
+        MES_NAME = #{mesName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        MODEL_NAME = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="listName != null" >
+        LIST_NAME = #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatPeople != null" >
+        CREAT_PEOPLE = #{creatPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modelConten != null" >
+        MODEL_CONTEN = #{modelConten,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where MES_ID = #{mesId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.x.common.dao.mapper.bo.SysSendMes" >
+    update sys_send_mes
+    set MES_NAME = #{mesName,jdbcType=VARCHAR},
+      MODEL_NAME = #{modelName,jdbcType=VARCHAR},
+      LIST_NAME = #{listName,jdbcType=VARCHAR},
+      CREAT_PEOPLE = #{creatPeople,jdbcType=VARCHAR},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      MODEL_CONTEN = #{modelConten,jdbcType=LONGVARCHAR}
+    where MES_ID = #{mesId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.x.common.dao.mapper.bo.SysSendMes" >
+    update sys_send_mes
+    set MES_NAME = #{mesName,jdbcType=VARCHAR},
+      MODEL_NAME = #{modelName,jdbcType=VARCHAR},
+      LIST_NAME = #{listName,jdbcType=VARCHAR},
+      CREAT_PEOPLE = #{creatPeople,jdbcType=VARCHAR},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP}
+    where MES_ID = #{mesId,jdbcType=VARCHAR}
+  </update>
+</mapper>

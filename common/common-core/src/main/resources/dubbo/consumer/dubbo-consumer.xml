@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans     
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+           http://code.alibabatech.com/schema/dubbo
+           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+	<bean id="dubboConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+<!-- 		<property name="locations" value="classpath:dubbo/dubbo.properties" /> -->
+	</bean>
+
+	<dubbo:application name="consumer-of-${dubbo.appname}" />
+
+	<dubbo:registry protocol="${dubbo.registry.protocol}"
+		address="${dubbo.registry.address}" />
+
+	<dubbo:monitor protocol="registry" />
+
+	<!-- 自动处理定时任务 -->
+	<!-- <dubbo:reference id="elasticJobSV"
+		interface="com.x.common.api.sysconfig.interfaces.IElasticJobSV" />
+		
+	订单详情查询
+	<dubbo:reference id="iQueryOrderDetailsSV"
+		interface="com.x.order.api.orderdetails.interfaces.IQueryOrderDetailsSV"/>
+	订单发票状态修改
+	<dubbo:reference id="iUpdateInvoiceSV"
+		interface="com.x.order.api.orderinvoice.interfaces.IUpdateInvoiceSV"/>
+	订单列表查询
+	<dubbo:reference id="iOrderQuerySV"
+		interface="com.x.order.api.orderquery.interfaces.IOrderQuerySV"/>
+		<dubbo:reference id="iUcMembersSV"
+		interface="com.x.ucenter.api.members.interfaces.IUcMembersSV" />
+		
+ 用户中心				
+    <dubbo:reference id="iYCUserServiceSV" interface="com.x.user.api.userservice.interfaces.IYCUserServiceSV" >
+		<dubbo:method name="queryUserPage" timeout="10000" retries="9" loadbalance="leastactive" actives="5" />
+	</dubbo:reference>	
+	
+	发邮件	
+	<dubbo:reference id="iSendEmailJobSV" interface="com.x.common.api.sendemailjobs.interfaces.ISendEmailJobSV" >
+	   <dubbo:method name="sendEmailJob" timeout="10000" retries="9" loadbalance="leastactive" actives="5" />
+	</dubbo:reference>	 -->
+</beans>

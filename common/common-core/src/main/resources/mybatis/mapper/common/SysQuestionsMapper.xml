@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.x.common.dao.mapper.interfaces.SysQuestionsMapper" >
+  <resultMap id="BaseResultMap" type="com.x.common.dao.mapper.bo.SysQuestions" >
+    <result column="qid" property="qid" jdbcType="VARCHAR" />
+    <result column="bid" property="bid" jdbcType="VARCHAR" />
+    <result column="qtype" property="qtype" jdbcType="CHAR" />
+    <result column="choice_question" property="choiceQuestion" jdbcType="VARCHAR" />
+    <result column="optionA" property="optiona" jdbcType="VARCHAR" />
+    <result column="optionB" property="optionb" jdbcType="VARCHAR" />
+    <result column="optionC" property="optionc" jdbcType="VARCHAR" />
+    <result column="optionD" property="optiond" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_operator" property="createOperator" jdbcType="VARCHAR" />
+    <result column="create_operator_id" property="createOperatorId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.x.common.dao.mapper.bo.SysQuestionsWithBLOBs" extends="BaseResultMap" >
+    <result column="original" property="original" jdbcType="LONGVARCHAR" />
+    <result column="translation" property="translation" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    qid, bid, qtype, choice_question, optionA, optionB, optionC, optionD, answer, status, 
+    create_operator, create_operator_id, create_time, flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    original, translation
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.x.common.dao.mapper.bo.SysQuestionsCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.x.common.dao.mapper.bo.SysQuestionsCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.x.common.dao.mapper.bo.SysQuestionsCriteria" >
+    delete from sys_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.x.common.dao.mapper.bo.SysQuestionsWithBLOBs" >
+    insert into sys_questions (qid, bid, qtype, 
+      choice_question, optionA, optionB, 
+      optionC, optionD, answer, 
+      status, create_operator, create_operator_id, 
+      create_time, flag, original, 
+      translation)
+    values (#{qid,jdbcType=VARCHAR}, #{bid,jdbcType=VARCHAR}, #{qtype,jdbcType=CHAR}, 
+      #{choiceQuestion,jdbcType=VARCHAR}, #{optiona,jdbcType=VARCHAR}, #{optionb,jdbcType=VARCHAR}, 
+      #{optionc,jdbcType=VARCHAR}, #{optiond,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createOperator,jdbcType=VARCHAR}, #{createOperatorId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=VARCHAR}, #{original,jdbcType=LONGVARCHAR}, 
+      #{translation,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.x.common.dao.mapper.bo.SysQuestionsWithBLOBs" >
+    insert into sys_questions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="qid != null" >
+        qid,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="qtype != null" >
+        qtype,
+      </if>
+      <if test="choiceQuestion != null" >
+        choice_question,
+      </if>
+      <if test="optiona != null" >
+        optionA,
+      </if>
+      <if test="optionb != null" >
+        optionB,
+      </if>
+      <if test="optionc != null" >
+        optionC,
+      </if>
+      <if test="optiond != null" >
+        optionD,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createOperator != null" >
+        create_operator,
+      </if>
+      <if test="createOperatorId != null" >
+        create_operator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="original != null" >
+        original,
+      </if>
+      <if test="translation != null" >
+        translation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="qid != null" >
+        #{qid,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=VARCHAR},
+      </if>
+      <if test="qtype != null" >
+        #{qtype,jdbcType=CHAR},
+      </if>
+      <if test="choiceQuestion != null" >
+        #{choiceQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="optiona != null" >
+        #{optiona,jdbcType=VARCHAR},
+      </if>
+      <if test="optionb != null" >
+        #{optionb,jdbcType=VARCHAR},
+      </if>
+      <if test="optionc != null" >
+        #{optionc,jdbcType=VARCHAR},
+      </if>
+      <if test="optiond != null" >
+        #{optiond,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperator != null" >
+        #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperatorId != null" >
+        #{createOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="original != null" >
+        #{original,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="translation != null" >
+        #{translation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.x.common.dao.mapper.bo.SysQuestionsCriteria" resultType="java.lang.Integer" >
+    select count(*) from sys_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_questions
+    <set >
+      <if test="record.qid != null" >
+        qid = #{record.qid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qtype != null" >
+        qtype = #{record.qtype,jdbcType=CHAR},
+      </if>
+      <if test="record.choiceQuestion != null" >
+        choice_question = #{record.choiceQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optiona != null" >
+        optionA = #{record.optiona,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionb != null" >
+        optionB = #{record.optionb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionc != null" >
+        optionC = #{record.optionc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optiond != null" >
+        optionD = #{record.optiond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createOperator != null" >
+        create_operator = #{record.createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createOperatorId != null" >
+        create_operator_id = #{record.createOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.original != null" >
+        original = #{record.original,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.translation != null" >
+        translation = #{record.translation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_questions
+    set qid = #{record.qid,jdbcType=VARCHAR},
+      bid = #{record.bid,jdbcType=VARCHAR},
+      qtype = #{record.qtype,jdbcType=CHAR},
+      choice_question = #{record.choiceQuestion,jdbcType=VARCHAR},
+      optionA = #{record.optiona,jdbcType=VARCHAR},
+      optionB = #{record.optionb,jdbcType=VARCHAR},
+      optionC = #{record.optionc,jdbcType=VARCHAR},
+      optionD = #{record.optiond,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      create_operator = #{record.createOperator,jdbcType=VARCHAR},
+      create_operator_id = #{record.createOperatorId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      flag = #{record.flag,jdbcType=VARCHAR},
+      original = #{record.original,jdbcType=LONGVARCHAR},
+      translation = #{record.translation,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_questions
+    set qid = #{record.qid,jdbcType=VARCHAR},
+      bid = #{record.bid,jdbcType=VARCHAR},
+      qtype = #{record.qtype,jdbcType=CHAR},
+      choice_question = #{record.choiceQuestion,jdbcType=VARCHAR},
+      optionA = #{record.optiona,jdbcType=VARCHAR},
+      optionB = #{record.optionb,jdbcType=VARCHAR},
+      optionC = #{record.optionc,jdbcType=VARCHAR},
+      optionD = #{record.optiond,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      create_operator = #{record.createOperator,jdbcType=VARCHAR},
+      create_operator_id = #{record.createOperatorId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      flag = #{record.flag,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
